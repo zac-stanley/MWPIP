@@ -23,9 +23,9 @@ My project will be an interactive map showing rates for rates of detection of th
 The samples provided are a polygon geojson of closures that is up to date as of 6/1/2020, a polyline shapefile of 6ft wide trails, and a polyline shapefile trails with use types respecively. The data from Marin County Parks, National Park Service, California State Parks, The Marin Municipal Water District and the Marin County Bicycle Coaltion (anticipated source not yet in hand).
 
 **Data Samples:**
-1. MarinClosures.geojson
-2. GOGATrails_6ftWide.geojson
-3. ONETAM_TRANS_Trails_ln.shp
+1. Data/DetectionRates.geojson
+2. Data/MWPIP_North_rate_of_detection_CBGF.csv
+
 
 ### Methods of Thematic Representation
 
@@ -40,7 +40,7 @@ The anticipated user interface will be a minimal bootstrap template that will us
 1. Excel and QGIS will be used to wrangle the data and prepare use in the web application
 2. Data will be in CSV and GeoJson format
 3. Libraries used will be leaflet, jQuery and Omnivore
-4. The map will use a bootstrap HTML template along with CSS, Assembly and native JavaScript
+4. The map will use a bootstrap or flexbox HTML template along with CSS, Assembly and native JavaScript
 5. The hosting platform that will be used is GitHub pages
 
 
