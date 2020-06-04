@@ -67,6 +67,16 @@
       <div class='bg-blue h180 w240 mx-auto'></div>
     </div>
 
+    <!-- camera id dropdown-->
+    <div id='camera-dropdown-ui' class='bg-white round-ml px8 py4' >
+      <!-- write form element in here -->
+    </div>
+
+    <!-- year dropdown-->
+    <div id='year-dropdown-ui' class='bg-white round-ml px8 py4' >
+      <!-- write form element in here -->
+    </div>
+
   </div>
 </div>
   
@@ -147,6 +157,42 @@
     }
 
     sliderControl.addTo(map);
+
+    // do the same thing for the UI slider
+    var yearControl = L.control({
+      position: 'topright'
+  });
+
+  yearControl.onAdd = function(map) {
+
+    var dropDownYear = L.DomUtil.get("year-dropdown-ui");
+
+    L.DomEvent.disableScrollPropagation(dropDownYear);
+    L.DomEvent.disableClickPropagation(dropDownYear);
+
+    return dropDownYear;
+
+  }
+
+  yearControl.addTo(map);
+
+    // do the same thing for the UI slider
+    var cameraControl = L.control({
+      position: 'topright'
+  });
+
+  cameraControl.onAdd = function(map) {
+
+    var dropDownCamera = L.DomUtil.get("camera-dropdown-ui");
+
+    L.DomEvent.disableScrollPropagation(dropDownCamera);
+    L.DomEvent.disableClickPropagation(dropDownCamera);
+
+    return dropDownCamera;
+
+  }
+
+  yearControl.addTo(map);
 
 
   </script>
