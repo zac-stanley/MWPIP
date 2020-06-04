@@ -68,13 +68,31 @@
     </div>
 
     <!-- camera id dropdown-->
-    <div id='camera-dropdown-ui' class='bg-white round-ml px8 py4' >
-      <!-- write form element in here -->
-    </div>
+    <div id='camera-dropdown-ui' class='select-container'>
+      <select class='select select--border-blue'>
+      <option>Camera ID</option>
+      <option>WW63</option>
+      <option>WW64</option>
+      <option>WW65</option>
+      <option>WW66</option>
+      </select>
+      <div class='select-arrow'></div>
+      </div>
+    
 
     <!-- year dropdown-->
-    <div id='year-dropdown-ui' class='bg-white round-ml px8 py4' >
-      <!-- write form element in here -->
+    <div id='year-dropdown-ui' class='select-container mx8' >
+      <select class='select select--border-blue'>
+      <option>Year</option>
+      <option>2014</option>
+      <option>2015</option>
+      <option>2016</option>
+      <option>2017</option>
+      </select>
+    <div class='select-arrow'></div>
+</div>
+      </div>
+
     </div>
 
   </div>
@@ -160,7 +178,7 @@
 
     // do the same thing for the UI slider
     var yearControl = L.control({
-      position: 'topright'
+    position: 'topright'
   });
 
   yearControl.onAdd = function(map) {
@@ -192,10 +210,11 @@
 
   }
 
-  yearControl.addTo(map);
+  cameraControl.addTo(map);
 
 
-  </script>
+
+</script>
 </body>
 
 </html>
