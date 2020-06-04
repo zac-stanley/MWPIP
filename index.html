@@ -55,6 +55,18 @@
   </div>
   <div class='flex-child flex-child--grow viewport-twothirds viewport-full-ml'>
     <div id="map" class='viewport-twothirds viewport-full-ml'></div>
+
+    <!-- ui slider -->
+    <div id='slider' class='range w240 bg-white round-ml px12'>
+      <input type="range" >
+    </div>
+
+    <!-- legend -->
+    <div id='legend' class='bg-white round-ml px18 py12'>
+      <h3 class='txt-bold mb12 w-full mx-auto'>Legend Title</h3>
+      <div class='bg-blue h180 w240 mx-auto'></div>
+    </div>
+
   </div>
 </div>
   
@@ -85,7 +97,56 @@
       accessToken: accessToken
     }).addTo(map);
 
-    omnivore.csv('Data/DetectionRates_BCGF.csv').addTo(map);
+    omnivore.csv('Data/DetectionRates_BCGF.csv')
+    .on('ready', function(e){
+    //  console.log(e.target)
+    // all data loaded into the layer
+    })
+    .on('error', function(e){
+    // if the error can't be parsed or loaded over AJAX
+      console.log(e.error[0].message);
+    })
+    .addTo(map);
+
+    // create leaflet control for legend
+    var legendControl = L.control({
+            position: 'bottomright'
+    });
+
+    // when the legend control is added to the map
+    legendControl.onAdd = function(map) {
+
+      // select legend using id attribute of legend
+      var legend = L.DomUtil.get("legend");
+
+      // disable scroll and click functionnality
+      L.DomEvent.disableScrollPropagation(legend);
+      L.DomEvent.disableClickPropagation(legend);
+
+      // return the selection
+      return legend;
+
+    }
+
+    legendControl.addTo(map);
+
+    // do the same thing for the UI slider
+    var sliderControl = L.control({
+        position: 'bottomleft'
+    });
+
+    sliderControl.onAdd = function(map) {
+
+      var controls = L.DomUtil.get("slider");
+
+      L.DomEvent.disableScrollPropagation(controls);
+      L.DomEvent.disableClickPropagation(controls);
+
+      return controls;
+
+    }
+
+    sliderControl.addTo(map);
 
 
   </script>
