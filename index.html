@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8 />
+  <title>MAP673 Assignment 04 Starter</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+  <style>
+    h1 {
+  color: orange
+    }
+
+    #map {
+      background: #448ee4;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class='flex-parent viewport-full relative scroll-hidden'>
+  <div class='flex-child w-full w300-ml absolute static-ml left bottom'>
+    <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-white py18 px12'>
+      <div class='flex-child flex-child--grow px12 py12 scroll-auto'>
+        <h1 class='txt-h1 mb6'>Title here</h1>
+        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed posuere
+          consectetur est
+          at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia
+          bibendum
+          nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus
+          et magnis dis parturient montes, nascetur ridiculus mus.</p>
+        <h2 class='txt-xl mt18 mb12'>subheading</h2>
+        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed posuere
+          consectetur est
+          at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia
+          bibendum
+          nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus
+          et magnis dis parturient montes, nascetur ridiculus mus.</p>
+      </div>
+      <footer class='px12 py12 bg-gray-faint txt-s'>
+        <ul>
+          <li>Explore the raw
+            <a class='link' href='#'>data</a>
+          </li>
+          <li>Map authored by
+            <a class='link' href='#'>Ptolemy</a>
+          </li>
+        </ul>
+      </footer>
+    </div>
+  </div>
+  <div class='flex-child flex-child--grow viewport-twothirds viewport-full-ml'>
+    <div id="map" class='viewport-twothirds viewport-full-ml'></div>
+  </div>
+</div>
+  
+  <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+  crossorigin=""></script>
+  <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+  <script>
+    // initialize the map centered on northern camera array
+    var map = L.map('map', {
+      zoomSnap: .1, 
+      center: [38.004, -122.665],
+      zoom: 13, 
+      minZoom: 11,
+      maxZoom: 14,
+      // maxBounds: L.latLngBounds([-6.22, 27.72], [5.76, 47.83])
+    });
+
+    // mapbox API access Token
+    var accessToken = 'pk.eyJ1IjoiemFjc3RhbmxleSIsImEiOiJCS20zaVR3In0._oaGhAVLz04gbE3M2HKHGA'
+  
+    // request a mapbox raster tile layer and add to map
+    L.tileLayer(`https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${accessToken}`, {
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+      maxZoom: 18,
+      id: 'mapbox.light',
+      accessToken: accessToken
+    }).addTo(map);
+
+    omnivore.csv('Data/DetectionRates_BCGF.csv').addTo(map);
+
+
+  </script>
+</body>
+
+</html>
