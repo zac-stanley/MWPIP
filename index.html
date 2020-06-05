@@ -70,20 +70,138 @@
     <!-- camera id dropdown-->
     <div id='camera-dropdown-ui' class='select-container'>
       <select class='select select--border-blue'>
-      <option>Camera ID</option>
+      <option>All Cameras</option>
+      <option>AAA67</option>
+      <option>AAA68</option>
+      <option>AAA69</option>
+      <option>BBB68</option>
+      <option>BBB69</option>
+      <option>CCC68</option>
+      <option>CCC70</option>
+      <option>CCC72</option>
+      <option>CCC73</option>
+      <option>DDD69</option>
+      <option>DDD70</option>
+      <option>DDD71</option>
+      <option>DDD72</option>
+      <option>DDD73</option>
+      <option>DDD74</option>
+      <option>EEE72</option>
+      <option>EEE74</option>
+      <option>FFF71</option>
+      <option>FFF72</option>
+      <option>FFF73</option>
+      <option>FFF74</option>
+      <option>GGG70</option>
+      <option>GGG71</option>
+      <option>GGG72</option>
+      <option>HHH66</option>
+      <option>HHH67</option>
+      <option>HHH68</option>
+      <option>HHH70</option>
+      <option>HHH71</option>
+      <option>HHH75</option>
+      <option>III66</option>
+      <option>III67</option>
+      <option>III68</option>
+      <option>III69</option>
+      <option>III71</option>
+      <option>III72</option>
+      <option>III75</option>
+      <option>JJJ67</option>
+      <option>JJJ68</option>
+      <option>JJJ71</option>
+      <option>JJJ72</option>
+      <option>JJJ73</option>
+      <option>JJJ75</option>
+      <option>KKK68</option>
+      <option>KKK72</option>
+      <option>KKK73</option>
+      <option>KKK75</option>
+      <option>LLL68</option>
+      <option>LLL69</option>
+      <option>LLL72</option>
+      <option>LLL73</option>
+      <option>LLL74</option>
+      <option>LLL75</option>
+      <option>MMM67</option>
+      <option>MMM68</option>
+      <option>MMM69</option>
+      <option>MMM72</option>
+      <option>MMM73</option>
+      <option>MMM74</option>
+      <option>MMM75</option>
+      <option>MMM76</option>
+      <option>NNN67</option>
+      <option>NNN68</option>
+      <option>NNN69</option>
+      <option>NNN71</option>
+      <option>NNN72</option>
+      <option>NNN73</option>
+      <option>NNN74</option>
+      <option>NNN75</option>
+      <option>NNN76</option>
+      <option>OOO72</option>
+      <option>OOO73</option>
+      <option>OOO74</option>
+      <option>OOO75</option>
+      <option>OOO76</option>
+      <option>PPP73</option>
+      <option>PPP74</option>
+      <option>PPP75</option>
+      <option>PPP76</option>
+      <option>QQQ74</option>
+      <option>QQQ75</option>
+      <option>QQQ76</option>
+      <option>RRR73</option>
+      <option>RRR74</option>
+      <option>RRR76</option>
+      <option>SSS71</option>
+      <option>SSS72</option>
+      <option>SSS75</option>
+      <option>SSS76</option>
+      <option>SSS77</option>
+      <option>SSS78</option>
+      <option>SSS79</option>
+      <option>TTT71</option>
+      <option>TTT72</option>
+      <option>TTT76</option>
+      <option>TTT77</option>
+      <option>TTT78</option>
+      <option>UUU76</option>
+      <option>UUU77</option>
+      <option>UUU78</option>
+      <option>VVV76</option>
+      <option>VVV77</option>
+      <option>VVV78</option>
       <option>WW63</option>
       <option>WW64</option>
       <option>WW65</option>
       <option>WW66</option>
+      <option>XX63</option>
+      <option>XX64</option>
+      <option>XX65</option>
+      <option>XX66</option>
+      <option>XX67</option>
+      <option>YY63</option>
+      <option>YY64</option>
+      <option>YY65</option>
+      <option>YY66</option>
+      <option>YY67</option>
+      <option>YY68</option>
+      <option>ZZ65</option>
+      <option>ZZ66</option>
+      <option>ZZ67</option>
+      <option>ZZ68</option>
+      <option>ZZ69</option>
       </select>
       <div class='select-arrow'></div>
       </div>
-    
 
     <!-- year dropdown-->
     <div id='year-dropdown-ui' class='select-container mx8' >
       <select class='select select--border-blue'>
-      <option>Year</option>
+      <option>All Years</option>
       <option>2014</option>
       <option>2015</option>
       <option>2016</option>
@@ -103,118 +221,8 @@
   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
   crossorigin=""></script>
   <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
-  <script>
-    // initialize the map centered on northern camera array
-    var map = L.map('map', {
-      zoomSnap: .1, 
-      center: [38.004, -122.665],
-      zoom: 13, 
-      minZoom: 11,
-      maxZoom: 14,
-      // maxBounds: L.latLngBounds([-6.22, 27.72], [5.76, 47.83])
-    });
+  <script src='js\app.js'></script>
 
-    // mapbox API access Token
-    var accessToken = 'pk.eyJ1IjoiemFjc3RhbmxleSIsImEiOiJCS20zaVR3In0._oaGhAVLz04gbE3M2HKHGA'
-  
-    // request a mapbox raster tile layer and add to map
-    L.tileLayer(`https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${accessToken}`, {
-      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-      maxZoom: 18,
-      id: 'mapbox.light',
-      accessToken: accessToken
-    }).addTo(map);
-
-    omnivore.csv('Data/DetectionRates_BCGF.csv')
-    .on('ready', function(e){
-    //  console.log(e.target)
-    // all data loaded into the layer
-    })
-    .on('error', function(e){
-    // if the error can't be parsed or loaded over AJAX
-      console.log(e.error[0].message);
-    })
-    .addTo(map);
-
-    // create leaflet control for legend
-    var legendControl = L.control({
-            position: 'bottomright'
-    });
-
-    // when the legend control is added to the map
-    legendControl.onAdd = function(map) {
-
-      // select legend using id attribute of legend
-      var legend = L.DomUtil.get("legend");
-
-      // disable scroll and click functionnality
-      L.DomEvent.disableScrollPropagation(legend);
-      L.DomEvent.disableClickPropagation(legend);
-
-      // return the selection
-      return legend;
-
-    }
-
-    legendControl.addTo(map);
-
-    // do the same thing for the UI slider
-    var sliderControl = L.control({
-        position: 'bottomleft'
-    });
-
-    sliderControl.onAdd = function(map) {
-
-      var controls = L.DomUtil.get("slider");
-
-      L.DomEvent.disableScrollPropagation(controls);
-      L.DomEvent.disableClickPropagation(controls);
-
-      return controls;
-
-    }
-
-    sliderControl.addTo(map);
-
-    // do the same thing for the UI slider
-    var yearControl = L.control({
-    position: 'topright'
-  });
-
-  yearControl.onAdd = function(map) {
-
-    var dropDownYear = L.DomUtil.get("year-dropdown-ui");
-
-    L.DomEvent.disableScrollPropagation(dropDownYear);
-    L.DomEvent.disableClickPropagation(dropDownYear);
-
-    return dropDownYear;
-
-  }
-
-  yearControl.addTo(map);
-
-    // do the same thing for the UI slider
-    var cameraControl = L.control({
-      position: 'topright'
-  });
-
-  cameraControl.onAdd = function(map) {
-
-    var dropDownCamera = L.DomUtil.get("camera-dropdown-ui");
-
-    L.DomEvent.disableScrollPropagation(dropDownCamera);
-    L.DomEvent.disableClickPropagation(dropDownCamera);
-
-    return dropDownCamera;
-
-  }
-
-  cameraControl.addTo(map);
-
-
-
-</script>
 </body>
 
 </html>
