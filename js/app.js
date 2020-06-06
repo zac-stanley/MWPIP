@@ -21,7 +21,7 @@ L.tileLayer(`https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=$
   accessToken: accessToken
 }).addTo(map);
 
-omnivore.csv('Data/DetectionRates_BCGF.csv')
+omnivore.csv('Data/DetectionRates_BCGF_Cleaned.csv')
 .on('ready', function(e){
 // access geoJson here
   drawMap(e.target.toGeoJSON());
@@ -72,12 +72,34 @@ function drawMap(data) {
   // adjust zoom level
   map.setZoom(map.getZoom() - .4);
 
+  // set initial circle size in map
+  resizeCircles(bobcatLayer, coyoteLayer,foxLayer, 1)
+
 } // end drawMap
 
 function calcRadius(val) {
   const radius = Math.sqrt(val / Math.PI);
   return radius * .5; // adjust scale factor
 }
+// resize circles based on detection rates using radius scaling
+function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, currentMonth){
+
+  bobcatLayer.eachLayer(function (layer) {
+    const radius = calcRadius(Number(layer.feature.properties['B' + currentMonth]));
+    layer.setRadius(radius);
+  });
+  
+  coyoteLayer.eachLayer(function (layer) {
+    const radius = calcRadius(Number(layer.feature.properties['C' + currentMonth]));
+    layer.setRadius(radius);
+  });
+
+  foxLayer.eachLayer(function (layer) {
+    const radius = calcRadius(Number(layer.feature.properties['F' + currentMonth]));
+    layer.setRadius(radius);
+  });
+  }
+
 
 
 
