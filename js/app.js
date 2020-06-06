@@ -23,14 +23,63 @@ L.tileLayer(`https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=$
 
 omnivore.csv('Data/DetectionRates_BCGF.csv')
 .on('ready', function(e){
-//  console.log(e.target)
+// access geoJson here
+  drawMap(e.target.toGeoJSON());
+// console.log(e.target.toGeoJSON()) 
+// console.log(e.target)
 // all data loaded into the layer
 })
 .on('error', function(e){
 // if the error can't be parsed or loaded over AJAX
   console.log(e.error[0].message);
 })
-.addTo(map);
+
+function drawMap(data) {
+ // console.log(data)
+ const options = {
+  pointToLayer: function (feature, ll) {
+    // Letters instead of numbers
+    return L.circleMarker(ll, {
+      opacity: 1,
+      weight: 2,
+      fillOpacity: 0
+    });
+  }
+
+}
+
+ // create 3 separate layers
+  const bobcatLayer = L.geoJson(data, options).addTo(map),
+    coyoteLayer = L.geoJson(data, options).addTo(map),
+    foxLayer = L.geoJson(data, options).addTo(map);
+
+  // fit the bounds to one of the layers
+  map.fitBounds(foxLayer.getBounds());
+
+  // set layer colors
+  bobcatLayer.setStyle({
+        color: '#BB952F'
+  });
+
+  coyoteLayer.setStyle({
+    color: '#A21E36'
+  });
+
+  foxLayer.setStyle({
+    color: '#3A4B56'
+  });
+
+  // adjust zoom level
+  map.setZoom(map.getZoom() - .4);
+
+} // end drawMap
+
+function calcRadius(val) {
+  const radius = Math.sqrt(val / Math.PI);
+  return radius * .5; // adjust scale factor
+}
+
+
 
 // create leaflet control for legend
 var legendControl = L.control({
