@@ -102,29 +102,29 @@ function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, currentMonth){
     const radius = calcRadius(Number(layer.feature.properties['f' + currentMonth]));
     layer.setRadius(radius);
   });
-   }
+
+  retrieveInfo(bobcatLayer, currentMonth)
+
+  }
 
 
+  // add year filter
+  var yearControl = L.control({
+  position: 'topright'
+  });
 
+  yearControl.onAdd = function(map) {
 
+  var dropDownYear = L.DomUtil.get("year-dropdown-ui");
 
-// do the same thing for the UI slider
-var yearControl = L.control({
-position: 'topright'
-});
+  L.DomEvent.disableScrollPropagation(dropDownYear);
+  L.DomEvent.disableClickPropagation(dropDownYear);
 
-yearControl.onAdd = function(map) {
+  return dropDownYear;
 
-var dropDownYear = L.DomUtil.get("year-dropdown-ui");
+  }
 
-L.DomEvent.disableScrollPropagation(dropDownYear);
-L.DomEvent.disableClickPropagation(dropDownYear);
-
-return dropDownYear;
-
-}
-
-yearControl.addTo(map);
+  yearControl.addTo(map);
 
 
 
@@ -264,7 +264,86 @@ function drawLegend (data) {
 
 function retrieveInfo(bobcatLayer, currentMonth){
 
+  // select the element and reference with variable
+  // and hide it from view initially
+  const info = $('#info').hide();
   
+  // use bobcatLayer to detect mouseover events
+  bobcatLayer.on('mouseover', function (e) {
+
+    // remove the none class to display and show
+    info.show();
+
+    // access properties of target layer
+    const props = e.layer.feature.properties;
+
+    // populate HTML elements with relevant info
+    $('#info span').html(props.Camera);
+    $(".bobcat span:first-child").html('(month ' + currentMonth + ')');
+    $(".coyote span:first-child").html('(month ' + currentMonth + ')');
+    $(".greyfox span:first-child").html('(month ' + currentMonth + ')');
+    $(".bobcat span:last-child").html(Number(props['b' + currentMonth]).toLocaleString());
+    $(".coyote span:last-child").html(Number(props['c' + currentMonth]).toLocaleString());
+    $(".greyfox span:last-child").html(Number(props['g' + currentMonth]).toLocaleString());
+
+     // raise opacity level as visual affordance
+     e.layer.setStyle({
+      fillOpacity: .6
+    });
+
+    // hide the info panel when mousing off layergroup and remove affordance opacity
+    bobcatLayer.on('mouseout', function(e) {
+        
+      // hide the info panel
+      info.hide();
+      
+      // reset the layer style
+      e.layer.setStyle({
+          fillOpacity: 0
+      });
+    });
+  
+  });
+
+  // use bobcatLayer to detect mouseover events
+  bobcatLayer.on('mouseover', function (e) {
+
+    // remove the none class to display and show
+    info.show();
+
+    // access properties of target layer
+    const props = e.layer.feature.properties;
+
+    // populate HTML elements with relevant info
+    $('#info span').html(props.Camera);
+    $(".bobcat span:first-child").html('(month ' + currentMonth + ')');
+    $(".coyote span:first-child").html('(month ' + currentMonth + ')');
+    $(".greyfox span:first-child").html('(month ' + currentMonth + ')');
+    $(".bobcat span:last-child").html(Number(props['b' + currentMonth]).toLocaleString());
+    $(".coyote span:last-child").html(Number(props['c' + currentMonth]).toLocaleString());
+    $(".greyfox span:last-child").html(Number(props['g' + currentMonth]).toLocaleString());
+
+     // raise opacity level as visual affordance
+     e.layer.setStyle({
+      fillOpacity: .6
+    });
+
+    // hide the info panel when mousing off layergroup and remove affordance opacity
+    bobcatLayer.on('mouseout', function(e) {
+        
+      // hide the info panel
+      info.hide();
+      
+      // reset the layer style
+      e.layer.setStyle({
+          fillOpacity: 0
+      });
+    });
+  
+  });
+
+
+
 }
 
 
