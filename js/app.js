@@ -103,9 +103,6 @@ function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, currentMonth){
   });
    }
 
-
-
-
 // create leaflet control for legend
 var legendControl = L.control({
         position: 'bottomright'
@@ -159,7 +156,7 @@ function sequenceUI(bobcatLayer, coyoteLayer, foxLayer){
 
   sliderControl.onAdd = function(map) {
 
-  var controls = L.DomUtil.get("slider");
+  const controls = L.DomUtil.get("slider");
 
   L.DomEvent.disableScrollPropagation(controls);
   L.DomEvent.disableClickPropagation(controls);
@@ -167,18 +164,20 @@ function sequenceUI(bobcatLayer, coyoteLayer, foxLayer){
   return controls;
 
   }
-
+  // add it to the map
   sliderControl.addTo(map);
 
   // select slider input and listen for change
-  $('#slider inpud[type=range]')
-    .on('input', function (){
-      // current value of slider is current month
-      var currentMonth = this.value
+ //select the slider's input and listen for change
+$('#slider input[type=range]')
+.on('input', function () {
 
-      // resize circles  with update detection rate
-      resizeCircles(bobcatLayer, coyoteLayer, foxLayer)
-    })
+  // current value of slider is current grade level
+  var currentMonth = this.value;
+
+  // resize the circles with updated grade level
+  resizeCircles(bobcatLayer, coyoteLayer, foxLayer, currentMonth);
+});
 
 
 }

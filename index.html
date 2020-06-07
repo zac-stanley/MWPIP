@@ -50,13 +50,18 @@
 
     <!-- ui slider -->
     <div id='slider' class='range w240 bg-white round-ml px12'>
-      <input type='range' min="9", max="45", value="9", step="1" >
+      <input type='range' min="9" , max="45" , value="1" , step="1" />
     </div>
 
     <!-- legend -->
-    <div id='legend' class='bg-white round-ml px18 py12'>
-      <h3 class='txt-bold mb12 w-full mx-auto'>Legend Title</h3>
-      <div class='bg-blue h180 w240 mx-auto'></div>
+    <div id='legend' class='bg-white round px12 py12 relative'>
+      <h3 class='txt-bold mb12 w180'>Legend Title</h3>
+      <div class='legend-circles relative w180'>
+        <div class="legend-large border border--gray-light absolute"></div>
+        <div class="legend-small border border--gray-light absolute"></div>
+        <div class="legend-large-label txt-m absolute"></div>
+        <div class="legend-small-label txt-m absolute"></div>
+      </div>
     </div>
 
       <!-- year dropdown-->
