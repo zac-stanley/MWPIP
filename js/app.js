@@ -227,7 +227,7 @@ function drawLegend (data) {
  
        // adjust the position of the large circle label based on size of circle
        $(".legend-large-label").css({
-         'top': -11,
+         'top': -5,
          'left': largeDiameter + 30
        });
  
@@ -244,7 +244,7 @@ function drawLegend (data) {
 
 });
 // verify your results!
-console.log(dataValues);
+//console.log(dataValues);
 
   // select legend using id attribute of legend
   var legend = L.DomUtil.get("legend");
@@ -260,6 +260,11 @@ console.log(dataValues);
 
   legendControl.addTo(map);
 
+}
+
+function retrieveInfo(bobcatLayer, currentMonth){
+
+  
 }
 
 

@@ -11,9 +11,26 @@ h1 {
   }
   
      hr.small, hr.large {
-      width: 83px;
+      width: 68px;
       position: absolute;
      */ top: -8px;
-      left: 55px;
+      left: 38px;
       border: 1px dashed #ccc;     /* overwrite assembly.css rule */
-      margin-top: 8px;            /* overwrite assembly.css rule */
+      margin-top: 4px;            /* overwrite assembly.css rule */
+  }
+
+     #info {
+      z-index: 1000;
+  }
+
+  .bobcat {
+    color: #BB952F;
+}
+
+  .coyote {
+    color: #A21E36;
+}
+
+  .greyFox {
+    color: #3A4B56;
+}
