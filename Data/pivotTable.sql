@@ -1,0 +1,45 @@
+select 
+    Project_ID,Lat,Lon,Camera,Month_num,Month_name,Year,CommonName,Rate_of_Detection,
+  geometry,
+    sum(case when Month_num='1' and CommonName = 'Grey Fox' then 1 end) as g1,
+    sum(case when Month_num='2' and CommonName = 'Grey Fox' then 1 end) as g2,
+    sum(case when Month_num='3' and CommonName = 'Grey Fox' then 1 end) as g3,
+    sum(case when Month_num='4' and CommonName = 'Grey Fox' then 1 end) as g4,
+    sum(case when Month_num='5' and CommonName = 'Grey Fox' then 1 end) as g5,
+    sum(case when Month_num='6' and CommonName = 'Grey Fox' then 1 end) as g6,
+    sum(case when Month_num='7' and CommonName = 'Grey Fox' then 1 end) as g7,
+    sum(case when Month_num='8' and CommonName = 'Grey Fox' then 1 end) as g8,
+    sum(case when Month_num='9' and CommonName = 'Grey Fox' then 1 end) as g9,
+    sum(case when Month_num='10' and CommonName = 'Grey Fox' then 1 end) as g10,
+    sum(case when Month_num='11' and CommonName = 'Grey Fox' then 1 end) as g11,
+    sum(case when Month_num='12' and CommonName = 'Grey Fox' then 1 end) as g12,
+    sum(case when Month_num='1' and CommonName = 'Coyote' then 1 end) as c1,
+    sum(case when Month_num='2' and CommonName = 'Coyote' then 1 end) as c2,
+    sum(case when Month_num='3' and CommonName = 'Coyote' then 1 end) as c3,
+    sum(case when Month_num='4' and CommonName = 'Coyote' then 1 end) as c4,
+    sum(case when Month_num='5' and CommonName = 'Coyote' then 1 end) as c5,
+    sum(case when Month_num='6' and CommonName = 'Coyote' then 1 end) as c6,
+    sum(case when Month_num='7' and CommonName = 'Coyote' then 1 end) as c7,
+    sum(case when Month_num='8' and CommonName = 'Coyote' then 1 end) as c8,
+    sum(case when Month_num='9' and CommonName = 'Coyote' then 1 end) as c9,
+    sum(case when Month_num='10' and CommonName = 'Coyote' then 1 end) as c10,
+    sum(case when Month_num='11' and CommonName = 'Coyote' then 1 end) as c11,
+    sum(case when Month_num='12' and CommonName = 'Coyote' then 1 end) as c12,
+    sum(case when Month_num='1' and CommonName = 'Bobcat' then 1 end) as b1,
+    sum(case when Month_num='2' and CommonName = 'Bobcat' then 1 end) as b2,
+    sum(case when Month_num='3' and CommonName = 'Bobcat' then 1 end) as b3,
+    sum(case when Month_num='4' and CommonName = 'Bobcat' then 1 end) as b4,
+    sum(case when Month_num='5' and CommonName = 'Bobcat' then 1 end) as b5,
+    sum(case when Month_num='6' and CommonName = 'Bobcat' then 1 end) as b6,
+    sum(case when Month_num='7' and CommonName = 'Bobcat' then 1 end) as b7,
+    sum(case when Month_num='8' and CommonName = 'Bobcat' then 1 end) as b8,
+    sum(case when Month_num='9' and CommonName = 'Bobcat' then 1 end) as b9,
+    sum(case when Month_num='10' and CommonName = 'Bobcat' then 1 end) as b10,
+    sum(case when Month_num='11' and CommonName = 'Bobcat' then 1 end) as b11,
+    sum(case when Month_num='12' and CommonName = 'Bobcat' then 1 end) as b12
+from 
+    DetectionRates_BCGF 
+group by 
+    Camera
+order by 
+    Camera
