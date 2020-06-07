@@ -21,7 +21,7 @@ L.tileLayer(`https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=$
   accessToken: accessToken
 }).addTo(map);
 
-omnivore.csv('Data/DetectionRates_BCGF_Cleaned.csv')
+omnivore.csv('Data/DetectionRates_BCGF_V5.csv')
 .on('ready', function(e){
 // access geoJson here
   drawMap(e.target.toGeoJSON());
@@ -73,32 +73,32 @@ function drawMap(data) {
   map.setZoom(map.getZoom() - .4);
 
   // set initial circle size in map
-  resizeCircles(bobcatLayer, coyoteLayer,foxLayer, 1)
+  resizeCircles(bobcatLayer, coyoteLayer,foxLayer, 9)
 
 } // end drawMap
 
 function calcRadius(val) {
   const radius = Math.sqrt(val / Math.PI);
-  return radius * .5; // adjust scale factor
+  return radius * 7; // adjust scale factor
 }
 // resize circles based on detection rates using radius scaling
 function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, currentMonth){
 
   bobcatLayer.eachLayer(function (layer) {
-    const radius = calcRadius(Number(layer.feature.properties['B' + currentMonth]));
+    const radius = calcRadius(Number(layer.feature.properties['b' + currentMonth]));
     layer.setRadius(radius);
   });
   
   coyoteLayer.eachLayer(function (layer) {
-    const radius = calcRadius(Number(layer.feature.properties['C' + currentMonth]));
+    const radius = calcRadius(Number(layer.feature.properties['c' + currentMonth]));
     layer.setRadius(radius);
   });
 
   foxLayer.eachLayer(function (layer) {
-    const radius = calcRadius(Number(layer.feature.properties['F' + currentMonth]));
+    const radius = calcRadius(Number(layer.feature.properties['f' + currentMonth]));
     layer.setRadius(radius);
   });
-  }
+   }
 
 
 
