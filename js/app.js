@@ -75,6 +75,9 @@ function drawMap(data) {
   // set initial circle size in map
   resizeCircles(bobcatLayer, coyoteLayer,foxLayer, 9)
 
+  // call sequenceUI function
+  sequenceUI(bobcatLayer, coyoteLayer, foxLayer)
+
 } // end drawMap
 
 function calcRadius(val) {
@@ -125,23 +128,7 @@ legendControl.onAdd = function(map) {
 
 legendControl.addTo(map);
 
-// do the same thing for the UI slider
-var sliderControl = L.control({
-    position: 'bottomleft'
-});
 
-sliderControl.onAdd = function(map) {
-
-  var controls = L.DomUtil.get("slider");
-
-  L.DomEvent.disableScrollPropagation(controls);
-  L.DomEvent.disableClickPropagation(controls);
-
-  return controls;
-
-}
-
-sliderControl.addTo(map);
 
 // do the same thing for the UI slider
 var yearControl = L.control({
@@ -161,22 +148,39 @@ return dropDownYear;
 
 yearControl.addTo(map);
 
-// do the same thing for the UI slider
-var cameraControl = L.control({
-  position: 'topright'
-});
 
-cameraControl.onAdd = function(map) {
 
-var dropDownCamera = L.DomUtil.get("camera-dropdown-ui");
+function sequenceUI(bobcatLayer, coyoteLayer, foxLayer){
 
-L.DomEvent.disableScrollPropagation(dropDownCamera);
-L.DomEvent.disableClickPropagation(dropDownCamera);
+  // do the same thing for the UI slider
+  const sliderControl = L.control({
+    position: 'bottomleft'
+  });
 
-return dropDownCamera;
+  sliderControl.onAdd = function(map) {
+
+  var controls = L.DomUtil.get("slider");
+
+  L.DomEvent.disableScrollPropagation(controls);
+  L.DomEvent.disableClickPropagation(controls);
+
+  return controls;
+
+  }
+
+  sliderControl.addTo(map);
+
+  // select slider input and listen for change
+  $('#slider inpud[type=range]')
+    .on('input', function (){
+      // current value of slider is current month
+      var currentMonth = this.value
+
+      // resize circles  with update detection rate
+      resizeCircles(bobcatLayer, coyoteLayer, foxLayer)
+    })
+
 
 }
-
-cameraControl.addTo(map);
 
 })();
