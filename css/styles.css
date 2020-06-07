@@ -5,3 +5,15 @@ h1 {
     #map {
       background: #448ee4;
     }
+
+    .legend-large, .legend-small {
+      border-radius: 50%;
+  }
+  
+     hr.small, hr.large {
+      width: 83px;
+      position: absolute;
+      top: -8px;
+      left: 55px;
+      border: 1px dashed #ccc;     /* overwrite assembly.css rule */
+      margin-top: 8px;            /* overwrite assembly.css rule */

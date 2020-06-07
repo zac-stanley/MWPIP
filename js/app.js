@@ -176,11 +176,11 @@ function drawLegend (data) {
   const dataValues = [];
 
   // loop through all camera detections
-  data.features.forEach(function (detections) {
+  data.features.forEach(function (camera) {
   // for each month in with a detection
-  for (let month in detections.properties) {
+  for (let month in camera.properties) {
     // shorthand to each value
-    const value = detections.properties[month];
+    const value = camera.properties[month];
     // if the value can be converted to a number 
     // the + operator in front of a number returns a number
     if (+value) {
@@ -191,60 +191,60 @@ function drawLegend (data) {
   }
 
   // sort our array
-const sortedValues = dataValues.sort(function(a, b) {
-  return b - a;
-});
-  //console.log(sortedValues)
+  const sortedValues = dataValues.sort(function(a, b) {
+    
+    return b - a;
+  });
+  // console.log(sortedValues)
 
   // round the highest number and use as our large circle diameter
-  // round the highest number and use as our large circle diameter
-  const maxValue = Math.round(sortedValues[0] / 1000) * 1000;
-  //  console.log(maxValue)
+  const maxValue = Math.round(sortedValues[0] / 2) * 2;
+  // console.log(maxValue)
 
- // calc the diameters
+  // calc the diameters
   const largeDiameter = calcRadius(maxValue) * 2,
   smallDiameter = largeDiameter / 2;
 
-  // select our circles container and set the height
-  $(".legend-circles").css('height', largeDiameter.toFixed());
+       // select our circles container and set the height
+       $(".legend-circles").css('height', largeDiameter.toFixed());
 
-  // set width and height for large circle
-  $('.legend-large').css({
-  'width': largeDiameter.toFixed(),
-  'height': largeDiameter.toFixed()
-  });
-  // set width and height for small circle and position
-  $('.legend-small').css({
-  'width': smallDiameter.toFixed(),
-  'height': smallDiameter.toFixed(),
-  'top': largeDiameter - smallDiameter,
-  'left': smallDiameter / 2
-  })
-
-  // label the max and median value
-  $(".legend-large-label").html(maxValue.toLocaleString());
-  $(".legend-small-label").html((maxValue / 2).toLocaleString());
-
-  // adjust the position of the large based on size of circle
-  $(".legend-large-label").css({
-  'top': -11,
-  'left': largeDiameter + 30,
-  });
-
-  // adjust the position of the large based on size of circle
-  $(".legend-small-label").css({
-  'top': smallDiameter - 11,
-  'left': largeDiameter + 30
-  });
-
-  // insert a couple hr elements and use to connect value label to top of each circle
-  $("<hr class='large'>").insertBefore(".legend-large-label")
-  $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 8);
+       // set the width and height for large circle
+       $(".legend-large").css({
+         'width': largeDiameter.toFixed(),
+         'height': largeDiameter.toFixed()
+       });
+       // set width and height for small circle position
+       $(".legend-small").css({
+         'width': smallDiameter.toFixed(),
+         'height': smallDiameter.toFixed(),
+         'top': largeDiameter - smallDiameter,
+         'left': smallDiameter / 2
+       })
+ 
+       // label the max and median value
+       $(".legend-large-label").html(maxValue.toLocaleString());
+       $(".legend-small-label").html((maxValue / 2).toLocaleString());
+ 
+       // adjust the position of the large circle based on size of circle
+       $(".legend-large-label").css({
+         'top': -11,
+         'left': largeDiameter + 30
+       });
+ 
+       // adjust the position of the large circle based on size of circle
+       $(".legend-small-label").css({
+         'top': smallDiameter - 11,
+         'left': largeDiameter + 30
+       });
+ 
+       // insert two hr elements and use to connect value label to top of each circle
+       $("<hr class='large'>").insertBefore(".legend-large-label")
+       $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 8);
 
 
 });
 // verify your results!
-// console.log(dataValues);
+console.log(dataValues);
 
   // select legend using id attribute of legend
   var legend = L.DomUtil.get("legend");
