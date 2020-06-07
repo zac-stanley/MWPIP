@@ -225,19 +225,19 @@ function drawLegend (data) {
        $(".legend-large-label").html(maxValue.toLocaleString());
        $(".legend-small-label").html((maxValue / 2).toLocaleString());
  
-       // adjust the position of the large circle based on size of circle
+       // adjust the position of the large circle label based on size of circle
        $(".legend-large-label").css({
          'top': -11,
          'left': largeDiameter + 30
        });
  
-       // adjust the position of the large circle based on size of circle
+       // adjust the position of the small circle label based on size of circle
        $(".legend-small-label").css({
          'top': smallDiameter - 11,
          'left': largeDiameter + 30
        });
  
-       // insert two hr elements and use to connect value label to top of each circle
+      // insert two hr elements and use to connect value label to top of each circle
        $("<hr class='large'>").insertBefore(".legend-large-label")
        $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 8);
 
