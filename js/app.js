@@ -86,24 +86,24 @@ function calcRadius(val) {
   return radius * 7; // adjust scale factor
 }
 // resize circles based on detection rates using radius scaling
-function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, currentMonth){
+function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, currentYear){
 
   bobcatLayer.eachLayer(function (layer) {
-    const radius = calcRadius(Number(layer.feature.properties['b' + currentMonth]));
+    const radius = calcRadius(Number(layer.feature.properties['b' + currentYear]));
     layer.setRadius(radius);
   });
   
   coyoteLayer.eachLayer(function (layer) {
-    const radius = calcRadius(Number(layer.feature.properties['c' + currentMonth]));
+    const radius = calcRadius(Number(layer.feature.properties['c' + currentYear]));
     layer.setRadius(radius);
   });
 
   foxLayer.eachLayer(function (layer) {
-    const radius = calcRadius(Number(layer.feature.properties['f' + currentMonth]));
+    const radius = calcRadius(Number(layer.feature.properties['f' + currentYear]));
     layer.setRadius(radius);
   });
 
-  retrieveInfo(bobcatLayer, currentMonth)
+  retrieveInfo(bobcatLayer, currentYear)
 
   }
 
@@ -149,15 +149,14 @@ function sequenceUI(bobcatLayer, coyoteLayer, foxLayer){
   sliderControl.addTo(map);
 
   // select slider input and listen for change
- //select the slider's input and listen for change
 $('#slider input[type=range]')
 .on('input', function () {
 
   // current value of slider is current grade level
-  var currentMonth = this.value;
+  var currentYear = this.value;
 
   // resize the circles with updated grade level
-  resizeCircles(bobcatLayer, coyoteLayer, foxLayer, currentMonth);
+  resizeCircles(bobcatLayer, coyoteLayer, foxLayer, currentYear);
 });
 
 }
@@ -239,7 +238,7 @@ function drawLegend (data) {
  
       // insert two hr elements and use to connect value label to top of each circle
        $("<hr class='large'>").insertBefore(".legend-large-label")
-       $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 8);
+       $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 2);
 
 
 });
@@ -262,7 +261,7 @@ function drawLegend (data) {
 
 }
 
-function retrieveInfo(bobcatLayer, currentMonth){
+function retrieveInfo(bobcatLayer, currentYear){
 
   // select the element and reference with variable
   // and hide it from view initially
@@ -279,12 +278,12 @@ function retrieveInfo(bobcatLayer, currentMonth){
 
     // populate HTML elements with relevant info
     $('#info span').html(props.Camera);
-    $(".bobcat span:first-child").html('(month ' + currentMonth + ')');
-    $(".coyote span:first-child").html('(month ' + currentMonth + ')');
-    $(".greyfox span:first-child").html('(month ' + currentMonth + ')');
-    $(".bobcat span:last-child").html(Number(props['b' + currentMonth]).toLocaleString());
-    $(".coyote span:last-child").html(Number(props['c' + currentMonth]).toLocaleString());
-    $(".greyfox span:last-child").html(Number(props['g' + currentMonth]).toLocaleString());
+    $(".bobcat span:first-child").html('(month ' + currentYear + ')');
+    $(".coyote span:first-child").html('(month ' + currentYear + ')');
+    $(".greyfox span:first-child").html('(month ' + currentYear + ')');
+    $(".bobcat span:last-child").html(Number(props['b' + currentYear]).toLocaleString());
+    $(".coyote span:last-child").html(Number(props['c' + currentYear]).toLocaleString());
+    $(".greyfox span:last-child").html(Number(props['f' + currentYear]).toLocaleString());
 
      // raise opacity level as visual affordance
      e.layer.setStyle({
@@ -304,48 +303,7 @@ function retrieveInfo(bobcatLayer, currentMonth){
     });
   
   });
-
-  // use bobcatLayer to detect mouseover events
-  bobcatLayer.on('mouseover', function (e) {
-
-    // remove the none class to display and show
-    info.show();
-
-    // access properties of target layer
-    const props = e.layer.feature.properties;
-
-    // populate HTML elements with relevant info
-    $('#info span').html(props.Camera);
-    $(".bobcat span:first-child").html('(month ' + currentMonth + ')');
-    $(".coyote span:first-child").html('(month ' + currentMonth + ')');
-    $(".greyfox span:first-child").html('(month ' + currentMonth + ')');
-    $(".bobcat span:last-child").html(Number(props['b' + currentMonth]).toLocaleString());
-    $(".coyote span:last-child").html(Number(props['c' + currentMonth]).toLocaleString());
-    $(".greyfox span:last-child").html(Number(props['g' + currentMonth]).toLocaleString());
-
-     // raise opacity level as visual affordance
-     e.layer.setStyle({
-      fillOpacity: .6
-    });
-
-    // hide the info panel when mousing off layergroup and remove affordance opacity
-    bobcatLayer.on('mouseout', function(e) {
-        
-      // hide the info panel
-      info.hide();
-      
-      // reset the layer style
-      e.layer.setStyle({
-          fillOpacity: 0
-      });
-    });
-  
-  });
-
-
 
 }
-
-
 
 })();
