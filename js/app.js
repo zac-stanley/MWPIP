@@ -103,7 +103,7 @@ function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, currentYear){
     layer.setRadius(radius);
   });
 
-  retrieveInfo(bobcatLayer, currentYear)
+  retrieveInfo(foxLayer, currentYear)
 
   }
 
@@ -238,7 +238,7 @@ function drawLegend (data) {
  
       // insert two hr elements and use to connect value label to top of each circle
        $("<hr class='large'>").insertBefore(".legend-large-label")
-       $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 2);
+       $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 8);
 
 
 });
@@ -261,14 +261,14 @@ function drawLegend (data) {
 
 }
 
-function retrieveInfo(bobcatLayer, currentYear){
+function retrieveInfo(foxLayer, currentYear){
 
   // select the element and reference with variable
   // and hide it from view initially
   const info = $('#info').hide();
   
   // use bobcatLayer to detect mouseover events
-  bobcatLayer.on('mouseover', function (e) {
+  foxLayer.on('mouseover', function (e) {
 
     // remove the none class to display and show
     info.show();
@@ -278,9 +278,10 @@ function retrieveInfo(bobcatLayer, currentYear){
 
     // populate HTML elements with relevant info
     $('#info span').html(props.Camera);
+    $(".greyfox span:first-child").html('(month ' + currentYear + ')');
     $(".bobcat span:first-child").html('(month ' + currentYear + ')');
     $(".coyote span:first-child").html('(month ' + currentYear + ')');
-    $(".greyfox span:first-child").html('(month ' + currentYear + ')');
+    
     $(".bobcat span:last-child").html(Number(props['b' + currentYear]).toLocaleString());
     $(".coyote span:last-child").html(Number(props['c' + currentYear]).toLocaleString());
     $(".greyfox span:last-child").html(Number(props['f' + currentYear]).toLocaleString());
@@ -291,7 +292,7 @@ function retrieveInfo(bobcatLayer, currentYear){
     });
 
     // hide the info panel when mousing off layergroup and remove affordance opacity
-    bobcatLayer.on('mouseout', function(e) {
+    foxLayer.on('mouseout', function(e) {
         
       // hide the info panel
       info.hide();
