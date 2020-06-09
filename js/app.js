@@ -54,6 +54,8 @@ function drawMap(data) {
     coyoteLayer = L.geoJson(data, options).addTo(map),
     foxLayer = L.geoJson(data, options).addTo(map);
 
+    
+
   // fit the bounds to one of the layers
   map.fitBounds(foxLayer.getBounds());
 
@@ -103,7 +105,7 @@ function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, currentYear){
     layer.setRadius(radius);
   });
 
-  retrieveInfo(foxLayer, currentYear)
+  retrieveInfo(bobcatLayer, currentYear)
 
   }
 
@@ -261,14 +263,14 @@ function drawLegend (data) {
 
 }
 
-function retrieveInfo(foxLayer, currentYear){
+function retrieveInfo(bobcatLayer, currentYear){
 
   // select the element and reference with variable
   // and hide it from view initially
   const info = $('#info').hide();
   
   // use bobcatLayer to detect mouseover events
-  foxLayer.on('mouseover', function (e) {
+  bobcatLayer.on('mouseover', function (e) {
 
     // remove the none class to display and show
     info.show();
@@ -278,9 +280,9 @@ function retrieveInfo(foxLayer, currentYear){
 
     // populate HTML elements with relevant info
     $('#info span').html(props.Camera);
-    $(".greyfox span:first-child").html('(month ' + currentYear + ')');
     $(".bobcat span:first-child").html('(month ' + currentYear + ')');
     $(".coyote span:first-child").html('(month ' + currentYear + ')');
+    $(".greyfox span:first-child").html('(month ' + currentYear + ')');
     
     $(".bobcat span:last-child").html(Number(props['b' + currentYear]).toLocaleString());
     $(".coyote span:last-child").html(Number(props['c' + currentYear]).toLocaleString());
@@ -292,7 +294,7 @@ function retrieveInfo(foxLayer, currentYear){
     });
 
     // hide the info panel when mousing off layergroup and remove affordance opacity
-    foxLayer.on('mouseout', function(e) {
+    bobcatLayer.on('mouseout', function(e) {
         
       // hide the info panel
       info.hide();
@@ -304,6 +306,8 @@ function retrieveInfo(foxLayer, currentYear){
     });
   
   });
+
+  
 
 }
 
