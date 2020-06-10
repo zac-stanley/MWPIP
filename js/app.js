@@ -85,24 +85,52 @@ function drawMap(data) {
 
 function calcRadius(val) {
   const radius = Math.sqrt(val / Math.PI);
-  return radius * 7; // adjust scale factor
+  return radius*10; // adjust scale factor
 }
 // resize circles based on detection rates using radius scaling
 function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, currentYear){
 
   bobcatLayer.eachLayer(function (layer) {
     const radius = calcRadius(Number(layer.feature.properties['b' + currentYear]));
-    layer.setRadius(radius);
+    if (radius == 0) {
+      layer.setStyle({
+        opacity: 0
+      })
+    } else {
+      layer.setRadius(radius);
+      layer.setStyle({
+        opacity: 1
+      })
+    }
+    
   });
   
   coyoteLayer.eachLayer(function (layer) {
     const radius = calcRadius(Number(layer.feature.properties['c' + currentYear]));
-    layer.setRadius(radius);
+    if (radius == 0) {
+      layer.setStyle({
+        opacity: 0
+      })
+    } else {
+      layer.setRadius(radius);
+      layer.setStyle({
+        opacity: 1
+      })
+    }
   });
 
   foxLayer.eachLayer(function (layer) {
     const radius = calcRadius(Number(layer.feature.properties['f' + currentYear]));
-    layer.setRadius(radius);
+    if (radius == 0) {
+      layer.setStyle({
+        opacity: 0
+      })
+    } else {
+      layer.setRadius(radius);
+      layer.setStyle({
+        opacity: 1
+      })
+    }
   });
 
   retrieveInfo(bobcatLayer, currentYear)
