@@ -53,6 +53,7 @@ function drawMap(data) {
   const bobcatLayer = L.geoJson(data, options).addTo(map),
     coyoteLayer = L.geoJson(data, options).addTo(map),
     foxLayer = L.geoJson(data, options).addTo(map);
+    interactiveLayer = L.geoJson(data, options).addTo(map);
 
     
 
@@ -76,7 +77,7 @@ function drawMap(data) {
   map.setZoom(map.getZoom() - .4);
 
   // set initial circle size in map
-  resizeCircles(bobcatLayer, coyoteLayer,foxLayer, 9)
+  resizeCircles(bobcatLayer, coyoteLayer,foxLayer, interactiveLayer, 9)
 
   // call sequenceUI function
   sequenceUI(bobcatLayer, coyoteLayer, foxLayer)
@@ -88,7 +89,7 @@ function calcRadius(val) {
   return radius*10; // adjust scale factor
 }
 // resize circles based on detection rates using radius scaling
-function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, currentYear){
+function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, currentYear){
 
   bobcatLayer.eachLayer(function (layer) {
     const radius = calcRadius(Number(layer.feature.properties['b' + currentYear]));
@@ -133,7 +134,14 @@ function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, currentYear){
     }
   });
 
-  retrieveInfo(bobcatLayer, currentYear)
+  interactiveLayer.eachLayer(function (layer) {
+    layer.setRadius(1);
+    layer.setStyle({
+      opacity: 1
+    })
+  });
+
+  retrieveInfo(interactiveLayer, currentYear)
 
   }
 
@@ -186,7 +194,7 @@ $('#slider input[type=range]')
   var currentYear = this.value;
 
   // resize the circles with updated grade level
-  resizeCircles(bobcatLayer, coyoteLayer, foxLayer, currentYear);
+  resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, currentYear);
 });
 
 }
