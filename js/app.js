@@ -81,6 +81,7 @@
 
     // call sequenceUI function
     sequenceUI(bobcatLayer, coyoteLayer, foxLayer)
+    dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer)
 
   } // end drawMap
 
@@ -145,6 +146,7 @@
 
   }
 
+function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
 
   // add year filter
   var yearControl = L.control({
@@ -162,7 +164,44 @@
 
   }
 
-  // yearControl.addTo(map);
+  yearControl.addTo(map);
+
+  // select slider input and listen for change
+  $('#year-dropdown-ui select')
+  .on('change', function () {
+
+    // current value of slider is current grade level
+    var selection = this.value;
+    console.log(selection)
+
+    if (selection == 'a') {
+
+      resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, 9)
+      $('#current-month').css('display', 'inherit')
+      $('#slider').css('display', 'inherit')
+
+    } else {
+      bobcatLayer.setStyle({
+        opacity: 0
+      })
+      coyoteLayer.setStyle({
+        opacity: 0
+      })
+      foxLayer.setStyle({
+        opacity: 0
+      })
+
+      $('#current-month').css('display', 'none')
+      $('#slider').css('display', 'none')
+
+      singleSpecies(interactiveLayer, selection);
+
+    }
+    
+  });
+
+}
+  
 
   // select the grade output we just added to the map
   const month = $('#current-month span');
@@ -218,6 +257,14 @@
         // resize the circles with updated grade level
         resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, monthYear);
       });
+
+  }
+
+  function singleSpecies(data, selection) {
+
+    data.eachLayer(function (layer) {
+    // access field that has total detection rates by species or year
+    });
 
   }
 
