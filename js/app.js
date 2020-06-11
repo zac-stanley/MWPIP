@@ -220,9 +220,10 @@ $('#slider input[type=range]')
 });
 
 }
-
+cc=0
 // draw legend function
 function drawLegend (data) {
+  
   // create leaflet control for legend
   var legendControl = L.control({
     position: 'bottomright'
@@ -248,6 +249,7 @@ function drawLegend (data) {
     }
 
   }
+})
 
   // sort our array
   const sortedValues = dataValues.sort(function(a, b) {
@@ -255,6 +257,7 @@ function drawLegend (data) {
     return b - a;
   });
   // console.log(sortedValues)
+
 
   // round the highest number and use as our large circle diameter
   const maxValue = Math.round(sortedValues[0] / 2) * 2;
@@ -297,11 +300,13 @@ function drawLegend (data) {
        });
  
       // insert two hr elements and use to connect value label to top of each circle
+      
+      
        $("<hr class='large'>").insertBefore(".legend-large-label")
-       $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 8);
+       $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 3);
 
 
-});
+
 // verify your results!
 //console.log(dataValues);
 
