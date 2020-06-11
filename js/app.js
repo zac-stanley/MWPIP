@@ -302,8 +302,8 @@ function drawLegend (data) {
       // insert two hr elements and use to connect value label to top of each circle
       
       
-       $("<hr class='large'>").insertBefore(".legend-large-label")
-       $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 3);
+       $("<hr class='large'>").insertBefore(".legend-large-label").css('top', -5)
+       $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 5);
 
 
 
