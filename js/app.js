@@ -162,7 +162,7 @@ function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, cur
 
   }
 
-  yearControl.addTo(map);
+  // yearControl.addTo(map);
 
 // select the grade output we just added to the map
 const month = $('#current-month span');
