@@ -164,7 +164,8 @@ function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, cur
 
   yearControl.addTo(map);
 
-
+// select the grade output we just added to the map
+const month = $('#current-month span');
 
 function sequenceUI(bobcatLayer, coyoteLayer, foxLayer){
 
@@ -186,15 +187,36 @@ function sequenceUI(bobcatLayer, coyoteLayer, foxLayer){
   // add it to the map
   sliderControl.addTo(map);
 
+   // create Leaflet control for the current month and year
+   const monthYear = L.control({
+    position: 'bottomleft'
+  });
+
+  // same as above
+  monthYear.onAdd = function (map) {
+
+    const month = L.DomUtil.get("current-month");
+
+    L.DomEvent.disableScrollPropagation(month);
+    L.DomEvent.disableClickPropagation(month);
+
+    return month;
+
+  }
+
+  monthYear.addTo(map);
+
   // select slider input and listen for change
 $('#slider input[type=range]')
 .on('input', function () {
 
   // current value of slider is current grade level
-  var currentYear = this.value;
+  var monthYear = this.value;
+
+  month.html(mY[monthYear])
 
   // resize the circles with updated grade level
-  resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, currentYear);
+  resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, monthYear);
 });
 
 }
