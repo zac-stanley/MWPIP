@@ -170,7 +170,7 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
   $('#year-dropdown-ui select')
   .on('change', function () {
 
-    // current value of slider is current grade level
+    // current value of slider is the month and year level
     var selection = this.value;
     console.log(selection)
 
