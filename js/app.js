@@ -3,8 +3,8 @@
   // initialize the map centered on northern camera array
   var map = L.map('map', {
     zoomSnap: .1,
-    center: [38.004, -122.665],
-    zoom: 13,
+    center: [38.004, -122.669],
+    zoom: 13.74,
     minZoom: 11,
     maxZoom: 14,
     // maxBounds: L.latLngBounds([-6.22, 27.72], [5.76, 47.83])
