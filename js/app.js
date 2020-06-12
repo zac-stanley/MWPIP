@@ -49,7 +49,7 @@
 
     }
 
-    // create 3 separate layers
+    // create 4 separate layers
     const bobcatLayer = L.geoJson(data, options).addTo(map),
       coyoteLayer = L.geoJson(data, options).addTo(map),
       foxLayer = L.geoJson(data, options).addTo(map);
@@ -203,7 +203,7 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
 }
   
 
-  // select the grade output we just added to the map
+  // select the current month and year 
   const month = $('#current-month span');
 
   function sequenceUI(bobcatLayer, coyoteLayer, foxLayer) {
@@ -249,12 +249,12 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
     $('#slider input[type=range]')
       .on('input', function () {
 
-        // current value of slider is current grade level
+        // current value of slider is current month and year 
         var monthYear = this.value;
 
         month.html(mY[monthYear])
 
-        // resize the circles with updated grade level
+        // resize the circles with updated rate of detection
         resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, monthYear);
       });
 
@@ -336,18 +336,18 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
 
       // adjust the position of the large circle label based on size of circle
       $(".legend-large-label").css({
-        'top': -5,
-        'left': largeDiameter + 30
+        'top': - 11,
+        'left': largeDiameter + 50
       });
 
       // adjust the position of the small circle label based on size of circle
       $(".legend-small-label").css({
         'top': smallDiameter - 11,
-        'left': largeDiameter + 30
+        'left': largeDiameter + 50
       });
 
       // insert two hr elements and use to connect value label to top of each circle
-      $("<hr class='large'>").insertBefore(".legend-large-label").css('top', -5)
+      $("<hr class='large'>").insertBefore(".legend-large-label").css('top', - 5)
       $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 5);
 
       // verify your results!
@@ -385,10 +385,10 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
       const props = e.layer.feature.properties;
 
       // populate HTML elements with relevant info
-      $('#info span').html(props.Camera);
-      $(".bobcat span:first-child").html('(month ' + currentYear + ')');
-      $(".coyote span:first-child").html('(month ' + currentYear + ')');
-      $(".greyfox span:first-child").html('(month ' + currentYear + ')');
+      $('#info span').html(`<b>${props.Camera}</b>`);
+      $(".bobcat span:first-child").html('');
+      $(".coyote span:first-child").html('');
+      $(".greyfox span:first-child").html('');
 
       $(".bobcat span:last-child").html(Number(props['b' + currentYear]).toLocaleString());
       $(".coyote span:last-child").html(Number(props['c' + currentYear]).toLocaleString());
@@ -412,8 +412,6 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
       });
 
     });
-
-
 
   }
 

@@ -1,6 +1,21 @@
-h1 {
-  color: orange
-    }
+  h3 {
+    color: black;
+    font-family: 'verlag';
+    src: url(Fonts/VerlagBold.otf);
+    font-style: normal;
+    font-weight: bold;
+
+  }
+
+  p {
+    color: black;
+    font-family: 'verlag';
+    src: url(Fonts/VerlagXLight.otf);
+    font-size: 1em;
+    font-style: normal;
+    font-weight: li;
+
+  }
 
     #map {
       background: #448ee4;
@@ -11,10 +26,10 @@ h1 {
   }
   
      hr.small, hr.large {
-      width: 68px;
+      width: 100px;
       position: absolute;
      */ top: -8px;
-      left: 38px;
+      left: 60px;
       border: 1px dashed #ccc;     /* overwrite assembly.css rule */
       margin-top: 4px;            /* overwrite assembly.css rule */
   }
@@ -33,4 +48,18 @@ h1 {
 
   .greyfox {
     color: #3A4B56;
+}
+
+@font-face {
+  font-family: 'verlag';
+  src: url(Fonts/VerlagBold.otf);
+  font-style: normal;
+  font-weight: 100
+}
+
+@font-face {
+  font-family: 'fairplex';
+  src: url(Fonts\FairplexWideOT.otf);
+  font-style: normal;
+  font-weight: 100;
 }
