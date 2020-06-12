@@ -49,6 +49,13 @@
   <div class='flex-child flex-child--grow viewport-twothirds viewport-full-ml'>
     <div id="map" class='viewport-twothirds viewport-full-ml'></div>
 
+     <!-- current grade -->
+  <div id='current-month' class='py6 px12 bg-white border border--gray-light round'>
+    <p class='txt-bold txt-headline'>
+      <span>September, 2014</span>
+    </p>
+  </div>
+
     <!-- ui slider -->
     <div id='slider' class='range w240 bg-white round-ml px12'>
       <input type='range' min="9" , max="45" , value="1" , step="1" />
@@ -76,11 +83,10 @@
       <!-- year dropdown-->
     <div id='year-dropdown-ui' class='select-container mx8' >
       <select class='select select--border-blue'>
-      <option>All Years</option>
-      <option>2014</option>
-      <option>2015</option>
-      <option>2016</option>
-      <option>2017</option>
+      <option value='a'>All Species</option>
+      <option value='b'>Bobcat</option>
+      <option value='c'>Coyote</option>
+      <option value='f'>Fox</option>
       </select>
     <div class='select-arrow'></div>
 </div>
@@ -97,7 +103,9 @@
   crossorigin=""></script>
   <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src='js\app.js'></script>
+  <script src='js/app.js'></script>
+  <script src='data/monthLookup.js'></script>
+
 
 </body>
 
