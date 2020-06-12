@@ -413,6 +413,28 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
 
     });
 
+    // when the mouse moves on the document
+  $(document).mousemove(function(e) {
+      // first offset from the mouse position of the info window
+      info.css({
+          "left": e.pageX + 6,
+          "top": e.pageY - info.height() - 25
+      });
+
+      // if it crashes into the top, flip it lower right
+      if (info.offset().top < 4) {
+          info.css({
+              "top": e.pageY + 15
+          });
+      }
+      // if it crashes into the right, flip it to the left
+      if (info.offset().left + info.width() >= $(document).width() - 40) {
+          info.css({
+              "left": e.pageX - info.width() - 80
+          });
+      }
+  });
+
   }
 
 })();

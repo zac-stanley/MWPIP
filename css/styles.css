@@ -71,8 +71,8 @@
     margin-top: 4px;            /* overwrite assembly.css rule */
   }
 
-     #info {
-      z-index: 1000;
+  #info {
+    z-index: 1000;
   }
 
   .bobcat {
@@ -88,11 +88,17 @@
 }
 
   .bg-sidebar {
-    background: #3A4B56;
+    background: #edf4f5;
+    
 }
 
   .bg-footer {
     background: #173560
+  }
+
+  .bg-info {
+    background: #EDF4F5;
+    
   }
 
 @font-face {
