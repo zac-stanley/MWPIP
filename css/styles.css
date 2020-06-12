@@ -35,6 +35,16 @@
 
   }
 
+  li {
+    color: black;
+    font-family: 'verlag';
+    src: url(Fonts/VerlagXLight.otf);
+    font-size: 1em;
+    font-style: normal;
+    font-weight: lighter;
+
+  }
+
     #map {
       background: #448ee4;
     }
