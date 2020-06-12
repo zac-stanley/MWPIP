@@ -49,17 +49,26 @@
       background: #448ee4;
     }
 
-    .legend-large, .legend-small {
-      border-radius: 50%;
+  .legend-large {
+    border-radius: 50%;
+    border-color: #A21E36 ;
+    border-width: .2em;
   }
   
-     hr.small, hr.large {
-      width: 100px;
-      position: absolute;
-     */ top: -8px;
-      left: 60px;
-      border: 1px dashed #ccc;     /* overwrite assembly.css rule */
-      margin-top: 4px;            /* overwrite assembly.css rule */
+  .legend-small {
+    border-radius: 50%;
+    border-color: #BB952F;
+    border-width: .2em;
+  }
+  
+    hr.small, hr.large {
+    width: 100px;
+    position: absolute;
+    */ top: -8px;
+    left: 60px;
+    background: #000000;
+    border: 1px dashed #ccc;     /* overwrite assembly.css rule */
+    margin-top: 4px;            /* overwrite assembly.css rule */
   }
 
      #info {
