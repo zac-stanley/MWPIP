@@ -1,9 +1,27 @@
-  h3 {
+  h1 {
     color: black;
     font-family: 'verlag';
     src: url(Fonts/VerlagBold.otf);
     font-style: normal;
     font-weight: bold;
+
+  }
+
+  h3 {
+    color: black;
+    font-family: 'verlag';
+    src: url(Fonts/VerlagBook.otf);
+    font-style: normal;
+    font-weight: normal;
+
+  }
+
+  h4 {
+    color: black;
+    font-family: 'verlag';
+    src: url(Fonts/VerlagBook.otf);
+    font-style: normal;
+    font-weight: normal;
 
   }
 
@@ -13,7 +31,7 @@
     src: url(Fonts/VerlagXLight.otf);
     font-size: 1em;
     font-style: normal;
-    font-weight: li;
+    font-weight: lighter;
 
   }
 
