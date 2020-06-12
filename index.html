@@ -17,12 +17,12 @@
 
 <div class='flex-parent viewport-full relative scroll-hidden'>
   <div class='flex-child w-full w300-ml absolute static-ml left bottom'>
-    <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-white py18 px12'>
+    <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-sidebar py18 px12'>
       <div class='flex-child flex-child--grow px12 py12 scroll-auto'>
         <h1 class='txt-h3 mb6'>Rates of Detection: Bobcat, Coyote and Grey Fox</h1>
         <h3 class='txt-h3 mb6'>2014-2017</h3>
         <p>This application displays rates of detection by month for the for north array of cameras. A rate of detection is the number of species seen during each event, normalized by 100 working trap nights. The number of species per event is the maximum number of species detected in a burst of camera images. The burst is taken from the first image trigger, until there is a quiet time of five seconds between one image and the next.</p>
-        <h4 class='txt-h4 mt18 mb12'>How to use the app:</h4>
+        <h4 class='txt-h4 mt18 mb12 txt-underline'>How to use the app:</h4>
         <ul>
           <li>1. Graduated symbols represent rates of detection by species as referenced in the legend where 100 is the highest recorded value and 50 is the median.</li>
           <li>2. Select species of interest from dropdown menu (all or indivdual).</li>
@@ -30,7 +30,7 @@
           <li>4. When time period of interest is determined hover mouse over camera location of interest to get a normalized rate of detection by species.</li>              
         </ul>
       </div>
-      <footer class='px12 py12 bg-gray-faint txt-s'>
+      <footer class='px12 py12 bg-footer txt-s'>
         <ul>
           <li>Learn more about  
             <a class='link' href='https://www.onetam.org/our-work/wildlife-picture-index'>wildlife cameras</a>
@@ -46,19 +46,19 @@
     <div id="map" class='viewport-twothirds viewport-full-ml'></div>
 
      <!-- current month and year -->
-  <div id='current-month' class='py6 px12 bg-white border border--gray-light round'>
+  <div id='current-month' class='py6 px12 bg-sidebar border border--gray-light round'>
     <p class='txt-bold txt-headline'>
       <span>September, 2014</span>
     </p>
   </div>
 
     <!-- ui slider -->
-    <div id='slider' class='range w240 bg-white round-ml px12'>
+    <div id='slider' class='range w240 bg-sidebar round-ml px12'>
       <input type='range' min="9" , max="45" , value="1" , step="1" />
     </div>
 
     <!-- legend -->
-    <div id='legend' class='bg-white round px12 py12  relative'>
+    <div id='legend' class='bg-sidebar round px12 py12  relative'>
       <p class='txt-bold mb12 w240'>Rate of Detection for Bobcat, Coyote and Grey Fox by Camera</p>
       <div class='legend-circles relative w180'>
         <div class="legend-large border border--gray-light absolute"></div>
@@ -69,7 +69,7 @@
     </div>
 
     <!-- ui info panel -->
-    <div id='info' class='py6 px12 bg-white border border--gray-light round fixed top right w240'>
+    <div id='info' class='py6 px12 bg-sidebar border border--gray-light round fixed top right w240'>
     <p>Camera ID: <span></span>
     <p class='bobcat'>Bobcat<span></span>: <span class='txt-l txt-bold'></span></p>
     <p class='coyote'>Coyote<span></span>: <span class='txt-l txt-bold'></span></p>
@@ -77,8 +77,8 @@
     </div>
 
       <!-- year dropdown-->
-    <div id='year-dropdown-ui' class='select-container mx8' >
-      <select class='select select--border-blue'>
+    <div id='year-dropdown-ui' class='select-container mx8 bg-sidebar' >
+      <select class='select select--border-black'>
       <option value='a'>All Species</option>
       <option value='b'>Bobcat</option>
       <option value='c'>Coyote</option>

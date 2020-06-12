@@ -78,6 +78,14 @@
     color: #3A4B56;
 }
 
+  .bg-sidebar {
+    background: #3A4B56;
+}
+
+  .bg-footer {
+    background: #173560
+  }
+
 @font-face {
   font-family: 'verlag';
   src: url(Fonts/VerlagBold.otf);
