@@ -135,9 +135,13 @@
     });
 
     interactiveLayer.eachLayer(function (layer) {
-      layer.setRadius(1);
+      layer.setRadius(2);
       layer.setStyle({
-        opacity: 1
+        opacity: .1,
+        fillColor: '#000000',
+        fillOpacity: .5,
+        color:'#000000'
+        
       })
     });
 
@@ -405,9 +409,9 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
         info.hide();
 
         // reset the layer style
-        e.layer.setStyle({
-          fillOpacity: 0
-        });
+        // // e.layer.setStyle({
+        // //   fillOpacity: 0
+        // });
       });
 
     });
