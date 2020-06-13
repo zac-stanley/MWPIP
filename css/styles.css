@@ -7,6 +7,18 @@
 
   }
 
+  h1.bobcat {
+    color: #BB952F;
+  }
+
+  h1.coyote {
+    color: #A21E36;
+  }
+
+  h1.greyfox {
+    color: #3A4B56;
+  }
+
   h3 {
     color: black;
     font-family: 'verlag';
@@ -16,7 +28,7 @@
 
   }
 
-  h4 {
+    h4 {
     color: black;
     font-family: 'verlag';
     src: url(Fonts/VerlagBook.otf);
@@ -93,12 +105,18 @@
 }
 
   .bg-footer {
-    background: #173560
+    background: #d6e5dd;
   }
 
   .bg-info {
     background: #EDF4F5;
     
+  }
+
+  .leaflet-bar a {
+    /* Override the default style for Leaflet's zoom  */
+    background: #edf4f5;
+    color:  #222;
   }
 
 @font-face {

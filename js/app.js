@@ -3,14 +3,14 @@
   // initialize the map centered on northern camera array
   var map = L.map('map', {
     zoomSnap: .1,
-    center: [38.004, -122.669],
-    zoom: 13.74,
+    center: [38.004, -122.665],
+    zoom: 13.4,
     minZoom: 11,
     maxZoom: 14,
-    // maxBounds: L.latLngBounds([-6.22, 27.72], [5.76, 47.83])
+    //maxBounds: L.latLngBounds([-122.75, 38.05], [-122.60, 37.97])
   });
 
-  // mapbox API access Token
+   // mapbox API access Token
   var accessToken = 'pk.eyJ1IjoiemFjc3RhbmxleSIsImEiOiJCS20zaVR3In0._oaGhAVLz04gbE3M2HKHGA'
 
   // request a mapbox raster tile layer and add to map
@@ -55,8 +55,7 @@
       foxLayer = L.geoJson(data, options).addTo(map);
     interactiveLayer = L.geoJson(data, options).addTo(map);
 
-
-
+  
     // fit the bounds to one of the layers
     map.fitBounds(foxLayer.getBounds());
 
@@ -369,14 +368,14 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
 
   }
 
-  function retrieveInfo(bobcatLayer, currentYear) {
+  function retrieveInfo(interactiveLayer, currentYear) {
 
     // select the element and reference with variable
     // and hide it from view initially
     const info = $('#info').hide();
 
     // use bobcatLayer to detect mouseover events
-    bobcatLayer.on('mouseover', function (e) {
+    interactiveLayer.on('mouseover', function (e) {
 
       // remove the none class to display and show
       info.show();
@@ -400,7 +399,7 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
       });
 
       // hide the info panel when mousing off layergroup and remove affordance opacity
-      bobcatLayer.on('mouseout', function (e) {
+      interactiveLayer.on('mouseout', function (e) {
 
         // hide the info panel
         info.hide();
