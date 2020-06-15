@@ -21,7 +21,7 @@
     accessToken: accessToken
   }).addTo(map);
 
-  omnivore.csv('Data/DetectionRates_BCGF_V5.csv')
+  omnivore.csv('Data/DetectionRates_BCGF_V7.csv')
     .on('ready', function (e) {
       // access geoJson here
       drawMap(e.target.toGeoJSON());
@@ -41,9 +41,10 @@
       pointToLayer: function (feature, ll) {
         // Letters instead of numbers
         return L.circleMarker(ll, {
-          opacity: 1,
+          
           weight: 2,
-          fillOpacity: 0
+          fillOpacity: 0,
+          opacity: 1
         });
       }
 
@@ -61,7 +62,8 @@
 
     // set layer colors
     bobcatLayer.setStyle({
-      color: '#BB952F'
+     color: '#BB952F'
+     
     });
 
     coyoteLayer.setStyle({
@@ -101,6 +103,8 @@
         layer.setRadius(radius);
         layer.setStyle({
           opacity: 1
+         
+          
         })
       }
 
@@ -116,6 +120,7 @@
         layer.setRadius(radius);
         layer.setStyle({
           opacity: 1
+          
         })
       }
     });
@@ -130,17 +135,16 @@
         layer.setRadius(radius);
         layer.setStyle({
           opacity: 1
-          
         })
       }
     });
 
     interactiveLayer.eachLayer(function (layer) {
-      layer.setRadius(2);
+      layer.setRadius(1);
       layer.setStyle({
-        opacity: .1,
+        opacity: 1,
         fillColor: '#000000',
-        fillOpacity: .5,
+        fillOpacity: 1,
         color:'#000000'
         
       })
@@ -410,9 +414,9 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
         info.hide();
 
         // reset the layer style
-        // // e.layer.setStyle({
-        // //   fillOpacity: 0
-        // });
+         e.layer.setStyle({
+           fillOpacity: 0
+        });
       });
 
     });
