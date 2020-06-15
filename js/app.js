@@ -130,6 +130,7 @@
         layer.setRadius(radius);
         layer.setStyle({
           opacity: 1
+          
         })
       }
     });
