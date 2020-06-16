@@ -21,7 +21,7 @@
     accessToken: accessToken
   }).addTo(map);
 
-  omnivore.csv('Data/DetectionRates_BCGF_V7.csv')
+  omnivore.csv('Data/DetectionRates_BCGF_V5.csv')
     .on('ready', function (e) {
       // access geoJson here
       drawMap(e.target.toGeoJSON());
@@ -45,6 +45,7 @@
           weight: 2,
           fillOpacity: 0,
           opacity: .7
+          
         });
       }
 
@@ -97,12 +98,13 @@
       const radius = calcRadius(Number(layer.feature.properties['b' + currentYear]));
       if (radius == 0) {
         layer.setStyle({
-          opacity: 0
+          stroke: false
         })
       } else {
         layer.setRadius(radius);
         layer.setStyle({
-          opacity: .7,
+          stroke: false,
+          fillOpacity: .7,
           fillColor: '#BB952F'
           
         })
@@ -119,7 +121,9 @@
       } else {
         layer.setRadius(radius);
         layer.setStyle({
-          opacity: 1
+          stroke: false,
+          fillOpacity: .7,
+          fillColor: '#A21E36'
           
         })
       }
@@ -134,7 +138,9 @@
       } else {
         layer.setRadius(radius);
         layer.setStyle({
-          opacity: 1
+          stroke: false,
+          fillOpacity: .7,
+          fillColor: '#3A4B56'
         })
       }
     });
@@ -143,7 +149,7 @@
       layer.setRadius(1);
       layer.setStyle({
         opacity: 1,
-        fillColor: '#000000',
+        fillColor: false,
         fillOpacity: 1,
         color:'#000000'
         
