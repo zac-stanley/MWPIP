@@ -21,7 +21,7 @@
     accessToken: accessToken
   }).addTo(map);
 
-  omnivore.csv('Data/DetectionRates_BCGF_V5.csv')
+  omnivore.csv('Data/DetectionRates_BCGF_V7.csv')
     .on('ready', function (e) {
       // access geoJson here
       drawMap(e.target.toGeoJSON());
