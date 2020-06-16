@@ -44,7 +44,7 @@
           
           weight: 2,
           fillOpacity: 0,
-          opacity: 1
+          opacity: .7
         });
       }
 
@@ -102,8 +102,8 @@
       } else {
         layer.setRadius(radius);
         layer.setStyle({
-          opacity: 1
-         
+          opacity: .7,
+          fillColor: '#BB952F'
           
         })
       }
