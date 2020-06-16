@@ -21,7 +21,9 @@
     accessToken: accessToken
   }).addTo(map);
 
-  omnivore.csv('Data/DetectionRates_BCGF_V7.csv')
+  var attributeValue = ('b'&&'c'&&'f')
+
+  omnivore.csv('Data/DetectionRates_BCGF_V5.csv')
     .on('ready', function (e) {
       // access geoJson here
       drawMap(e.target.toGeoJSON());
@@ -84,8 +86,13 @@
     // call sequenceUI function
     sequenceUI(bobcatLayer, coyoteLayer, foxLayer)
     dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer)
+    updateMap(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer)
 
   } // end drawMap
+
+  function updateMap(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer){
+    
+  }
 
   function calcRadius(val) {
     const radius = Math.sqrt(val / Math.PI);
@@ -162,23 +169,30 @@
 
 function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
 
-  // add year filter
-  var yearControl = L.control({
+  // add species filter
+  var totalControl = L.control({
     position: 'topright'
   });
 
-  yearControl.onAdd = function (map) {
+  totalControl.onAdd = function () {
 
-    var dropDownYear = L.DomUtil.get("year-dropdown-ui");
+    var dropDownTotal = L.DomUtil.get("total-dropdown-ui");
 
-    L.DomEvent.disableScrollPropagation(dropDownYear);
-    L.DomEvent.disableClickPropagation(dropDownYear);
+    L.DomEvent.disableScrollPropagation(dropDownTotal);
+    L.DomEvent.disableClickPropagation(dropDownTotal); 
 
-    return dropDownYear;
+    return dropDownTotal;
 
   }
 
-  yearControl.addTo(map);
+    $('#total-dropdown-ui select').change(function() {
+     
+      attributeValue = this.value;
+      updateMap(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer)
+    });
+
+
+  totalControl.addTo(map);
 
   // select slider input and listen for change
   $('#year-dropdown-ui select')
