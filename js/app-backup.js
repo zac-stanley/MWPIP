@@ -54,30 +54,37 @@
     }
 
     // create 4 separate layers
-    const bobcatLayer = L.geoJson(data, options)
-      coyoteLayer = L.geoJson(data, options)
-      foxLayer = L.geoJson(data, options)
+    const bobcatLayer = L.geoJson(data, options).addTo(map),
+      coyoteLayer = L.geoJson(data, options).addTo(map),
+      foxLayer = L.geoJson(data, options).addTo(map);
     interactiveLayer = L.geoJson(data, options).addTo(map);
 
 
     // fit the bounds to one of the layers
     map.fitBounds(interactiveLayer.getBounds());
 
+    // set layer colors
+    bobcatLayer.setStyle({
+      color: '#BB952F'
 
-    interactiveLayer.setStyle({
-      weight: 2,
-      color: '#222'
+    });
 
+    coyoteLayer.setStyle({
+      color: '#A21E36'
+    });
+
+    foxLayer.setStyle({
+      color: '#3A4B56'
     });
 
     // adjust zoom level
     map.setZoom(map.getZoom() - .4);
 
     // set initial circle size in map
-    resizeCircles(interactiveLayer, 9)
+    resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, 9)
 
     // call sequenceUI function
-    sequenceUI(interactiveLayer)
+    sequenceUI(bobcatLayer, coyoteLayer, foxLayer)
     dropDownUI(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer)
 
 
@@ -88,30 +95,75 @@
     return radius * 10; // adjust scale factor
   }
   // resize circles based on detection rates using radius scaling
-  function resizeCircles(interactiveLayer, monthYear) {
+  function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, monthYear) {
 
-    interactiveLayer.eachLayer(function (layer) {
-      const props =  layer.feature.properties
-      const relativeDetRate = Number(props['b' + monthYear]) + Number(props['c' + monthYear]) + Number(props['f' + monthYear])
-      const radius = calcRadius(relativeDetRate);
+    bobcatLayer.eachLayer(function (layer) {
+      const radius = calcRadius(Number(layer.feature.properties['b' + monthYear]));
       if (radius == 0) {
         layer.setStyle({
-          color: '#555',
-          radius: 0.5
+          stroke: false
         })
       } else {
         layer.setRadius(radius);
+        layer.setStyle({
+          stroke: false,
+          fillOpacity: .7,
+          fillColor: '#BB952F'
+
+        })
       }
 
     });
 
-  
+    coyoteLayer.eachLayer(function (layer) {
+      const radius = calcRadius(Number(layer.feature.properties['c' + monthYear]));
+      if (radius == 0) {
+        layer.setStyle({
+          opacity: 0
+        })
+      } else {
+        layer.setRadius(radius);
+        layer.setStyle({
+          stroke: false,
+          fillOpacity: .7,
+          fillColor: '#A21E36'
+
+        })
+      }
+    });
+
+    foxLayer.eachLayer(function (layer) {
+      const radius = calcRadius(Number(layer.feature.properties['f' + monthYear]));
+      if (radius == 0) {
+        layer.setStyle({
+          opacity: 0
+        })
+      } else {
+        layer.setRadius(radius);
+        layer.setStyle({
+          stroke: false,
+          fillOpacity: .7,
+          fillColor: '#3A4B56'
+        })
+      }
+    });
+
+    interactiveLayer.eachLayer(function (layer) {
+      layer.setRadius(1);
+      layer.setStyle({
+        opacity: 1,
+        fillColor: false,
+        fillOpacity: 1,
+        color: '#000000'
+
+      })
+    });
 
     retrieveInfo(interactiveLayer, monthYear)
 
   }
 
-  function dropDownUI(interactiveLayer) {
+  function dropDownUI(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
 
     // add species filter
     var speciesControl = L.control({
@@ -300,7 +352,7 @@
         month.html(mY[monthYear])
 
         // resize the circles with updated rate of detection
-        resizeCircles(interactiveLayer, monthYear);
+        resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, monthYear);
       });
 
   }
