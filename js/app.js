@@ -22,6 +22,10 @@
   }).addTo(map);
 
 
+  // make global
+  let species = 'all'
+
+
 
   omnivore.csv('Data/DetectionRates_BCGF_V5.csv')
     .on('ready', function (e) {
@@ -74,11 +78,11 @@
     map.setZoom(map.getZoom() - .4);
 
     // set initial circle size in map
-    resizeCircles(interactiveLayer, 9)
+    resizeCircles(interactiveLayer, 9, species)
 
     // call sequenceUI function
     sequenceUI(interactiveLayer)
-    dropDownUI(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer)
+    dropDownUI(interactiveLayer)
 
 
   } // end drawMap
@@ -88,28 +92,65 @@
     return radius * 10; // adjust scale factor
   }
   // resize circles based on detection rates using radius scaling
-  function resizeCircles(interactiveLayer, monthYear) {
+  function resizeCircles(interactiveLayer, monthYear, species) {
 
-    interactiveLayer.eachLayer(function (layer) {
-      const props =  layer.feature.properties
-      const relativeDetRate = Number(props['b' + monthYear]) + Number(props['c' + monthYear]) + Number(props['f' + monthYear])
-      const radius = calcRadius(relativeDetRate);
-      if (radius == 0) {
+    if (species == "all") {
+      interactiveLayer.eachLayer(function (layer) {
+
         layer.setStyle({
-          color: '#555',
-          radius: 0.5
+          color: '#333'
         })
-      } else {
-        layer.setRadius(radius);
-      }
-
-    });
-
+        
+        const props =  layer.feature.properties
+        const relativeDetRate = Number(props['b' + monthYear]) + Number(props['c' + monthYear]) + Number(props['f' + monthYear])
+        const radius = calcRadius(relativeDetRate);
+        if (radius == 0) {
+          layer.setStyle({
+            color: '#555',
+            radius: 0.5
+          })
+        } else {
+          layer.setRadius(radius);
+        }
   
+      });
+    } else {
 
-    retrieveInfo(interactiveLayer, monthYear)
+      interactiveLayer.eachLayer(function (layer) {
+
+        layer.setStyle({
+          color: '#333'
+        })
+
+        const props =  layer.feature.properties
+        const relativeDetRate = Number(props[species + monthYear])
+        const radius = calcRadius(relativeDetRate);
+        const color = function(species) {
+          if (species == 'c') {
+            return '#772233' // for example
+          } else {
+            return '#333'
+          }
+        }
+        console.log(color(species), species)
+        if (radius == 0) {
+          layer.setStyle({
+            color: '#555',
+            radius: 0.5
+          })
+        } else {
+          layer.setRadius(radius)
+          layer.setStyle({
+           color: color(species)
+          })
+          
+        }
+
+    })
 
   }
+  retrieveInfo(interactiveLayer, monthYear)
+}
 
   function dropDownUI(interactiveLayer) {
 
@@ -136,111 +177,11 @@
       .on('change', function () {
 
         // current value of slider is the month and year level
-        var selection = this.value;
-        console.log(selection)
-
-        if (selection == 'a') {
-
-          resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, 9)
+        species = this.value;
+        console.log(species)
+        resizeCircles(interactiveLayer, 9, species)
           $('#current-month').css('display', 'inherit')
           $('#slider').css('display', 'inherit')
-
-        } else {
-          bobcatLayer.setStyle({
-            opacity: 0
-          })
-          coyoteLayer.setStyle({
-            opacity: 0
-          })
-          foxLayer.setStyle({
-            opacity: 0
-          })
-
-          $('#current-month').css('display', 'inherit')
-          $('#slider').css('display', 'inherit')
-
-          singleSpecies(interactiveLayer, selection);
-
-        }
-
-        if (selection == 'b') {
-
-          resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, 9)
-          bobcatLayer.setStyle({
-            opacity: .7
-          })
-          $('#current-month').css('display', 'inherit')
-          $('#slider').css('display', 'inherit')
-
-
-        } else {
-
-          coyoteLayer.setStyle({
-            opacity: 0
-          })
-          foxLayer.setStyle({
-            opacity: 0
-          })
-
-          $('#current-month').css('display', 'inherit')
-          $('#slider').css('display', 'inherit')
-
-          singleSpecies(interactiveLayer, selection);
-
-        }
-
-        if (selection == 'c') {
-
-          resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, 9)
-          coyoteLayer.setStyle({
-            opacity: .7
-          })
-          $('#current-month').css('display', 'inherit')
-          $('#slider').css('display', 'inherit')
-
-
-        } else {
-
-          bobcatLayer.setStyle({
-            opacity: 0
-          })
-          foxLayer.setStyle({
-            opacity: 0
-          })
-
-          $('#current-month').css('display', 'inherit')
-          $('#slider').css('display', 'inherit')
-
-          singleSpecies(interactiveLayer, selection);
-
-        }
-
-        if (selection == 'f') {
-
-          resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, 9)
-          foxLayer.setStyle({
-            opacity: .7
-          })
-          $('#current-month').css('display', 'inherit')
-          $('#slider').css('display', 'inherit')
-
-
-        } else {
-
-          bobcatLayer.setStyle({
-            opacity: 0
-          })
-          coyoteLayer.setStyle({
-            opacity: 0
-          })
-
-          $('#current-month').css('display', 'inherit')
-          $('#slider').css('display', 'inherit')
-
-          singleSpecies(interactiveLayer, selection);
-
-        }
-
       });
 
 
@@ -251,7 +192,7 @@
   // select the current month and year 
   const month = $('#current-month span');
 
-  function sequenceUI(bobcatLayer, coyoteLayer, foxLayer) {
+  function sequenceUI(interactiveLayer) {
 
     // do the same thing for the UI slider
     const sliderControl = L.control({
@@ -300,7 +241,8 @@
         month.html(mY[monthYear])
 
         // resize the circles with updated rate of detection
-        resizeCircles(interactiveLayer, monthYear);
+        console.log (species)
+        resizeCircles(interactiveLayer, monthYear, species);
       });
 
   }
