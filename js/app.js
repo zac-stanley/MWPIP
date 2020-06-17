@@ -92,19 +92,19 @@
   } // end drawMap
 
   function updateMap(bobcatLayer, coyoteLayer, foxLayer, monthYear){
-    bobcatLayer.eachLayer(function (layer) {
-      const bProps = (layer.feature.properties['b' + monthYear])
-      layer.setStyle({
-        fillColor: '#FFA500'
-      })
-    });
+    // bobcatLayer.eachLayer(function (layer) {
+    //   const bProps = (layer.feature.properties['b' + monthYear])
+    //   layer.setStyle({
+    //     fillColor: '#FFA500'
+    //   })
+    // });
 
-    coyoteLayer.eachLayer(function (layer) {
-      const cProps = (layer.feature.properties['c' + monthYear])
-      layer.setStyle({
-        fillColor: '#FF69B4'
-      })
-    });
+    // coyoteLayer.eachLayer(function (layer) {
+    //   const cProps = (layer.feature.properties['c' + monthYear])
+    //   layer.setStyle({
+    //     fillColor: '#FF69B4'
+    //   })
+    // });
     
   }
 
