@@ -21,7 +21,8 @@
     accessToken: accessToken
   }).addTo(map);
 
-  var attributeValue = ('b'&&'c'&&'f')
+  var attributeValue = "b9"
+  console.log(attributeValue)
 
   omnivore.csv('Data/DetectionRates_BCGF_V5.csv')
     .on('ready', function (e) {
@@ -86,23 +87,38 @@
     // call sequenceUI function
     sequenceUI(bobcatLayer, coyoteLayer, foxLayer)
     dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer)
-    updateMap(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer)
+    updateMap(bobcatLayer, coyoteLayer, foxLayer)
 
   } // end drawMap
 
-  function updateMap(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer){
+  function updateMap(bobcatLayer, coyoteLayer, foxLayer, monthYear){
+    bobcatLayer.eachLayer(function (layer) {
+      const bProps = (layer.feature.properties['b' + monthYear])
+      layer.setStyle({
+        fillColor: '#FFA500'
+      })
+    });
+
+    coyoteLayer.eachLayer(function (layer) {
+      const cProps = (layer.feature.properties['c' + monthYear])
+      layer.setStyle({
+        fillColor: '#FF69B4'
+      })
+    });
     
   }
+
+
 
   function calcRadius(val) {
     const radius = Math.sqrt(val / Math.PI);
     return radius * 10; // adjust scale factor
   }
   // resize circles based on detection rates using radius scaling
-  function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, currentYear) {
+  function resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, monthYear) {
 
     bobcatLayer.eachLayer(function (layer) {
-      const radius = calcRadius(Number(layer.feature.properties['b' + currentYear]));
+      const radius = calcRadius(Number(layer.feature.properties['b' + monthYear]));
       if (radius == 0) {
         layer.setStyle({
           stroke: false
@@ -120,7 +136,7 @@
     });
 
     coyoteLayer.eachLayer(function (layer) {
-      const radius = calcRadius(Number(layer.feature.properties['c' + currentYear]));
+      const radius = calcRadius(Number(layer.feature.properties['c' + monthYear]));
       if (radius == 0) {
         layer.setStyle({
           opacity: 0
@@ -137,7 +153,7 @@
     });
 
     foxLayer.eachLayer(function (layer) {
-      const radius = calcRadius(Number(layer.feature.properties['f' + currentYear]));
+      const radius = calcRadius(Number(layer.feature.properties['f' + monthYear]));
       if (radius == 0) {
         layer.setStyle({
           opacity: 0
@@ -163,7 +179,7 @@
       })
     });
 
-    retrieveInfo(interactiveLayer, currentYear)
+    retrieveInfo(interactiveLayer, monthYear)
 
   }
 
@@ -188,7 +204,7 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
     $('#total-dropdown-ui select').change(function() {
      
       attributeValue = this.value;
-      updateMap(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer)
+      updateMap(bobcatLayer, coyoteLayer, foxLayer)
     });
 
 
@@ -397,7 +413,7 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
 
   }
 
-  function retrieveInfo(interactiveLayer, currentYear) {
+  function retrieveInfo(interactiveLayer, monthYear) {
 
     // select the element and reference with variable
     // and hide it from view initially
@@ -418,9 +434,9 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
       $(".coyote span:first-child").html('');
       $(".greyfox span:first-child").html('');
 
-      $(".bobcat span:last-child").html(Number(props['b' + currentYear]).toLocaleString());
-      $(".coyote span:last-child").html(Number(props['c' + currentYear]).toLocaleString());
-      $(".greyfox span:last-child").html(Number(props['f' + currentYear]).toLocaleString());
+      $(".bobcat span:last-child").html(Number(props['b' + monthYear]).toLocaleString());
+      $(".coyote span:last-child").html(Number(props['c' + monthYear]).toLocaleString());
+      $(".greyfox span:last-child").html(Number(props['f' + monthYear]).toLocaleString());
 
       // raise opacity level as visual affordance
       e.layer.setStyle({
