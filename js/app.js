@@ -61,7 +61,7 @@
 
 
     // fit the bounds to one of the layers
-    map.fitBounds(foxLayer.getBounds());
+    map.fitBounds(interactiveLayer.getBounds());
 
     // set layer colors
     bobcatLayer.setStyle({
