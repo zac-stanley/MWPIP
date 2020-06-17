@@ -10,7 +10,7 @@
     //maxBounds: L.latLngBounds([-122.75, 38.05], [-122.60, 37.97])
   });
 
-   // mapbox API access Token
+  // mapbox API access Token
   var accessToken = 'pk.eyJ1IjoiemFjc3RhbmxleSIsImEiOiJCS20zaVR3In0._oaGhAVLz04gbE3M2HKHGA'
 
   // request a mapbox raster tile layer and add to map
@@ -21,7 +21,7 @@
     accessToken: accessToken
   }).addTo(map);
 
-  
+
 
   omnivore.csv('Data/DetectionRates_BCGF_V5.csv')
     .on('ready', function (e) {
@@ -43,11 +43,11 @@
       pointToLayer: function (feature, ll) {
         // Letters instead of numbers
         return L.circleMarker(ll, {
-          
+
           weight: 2,
           fillOpacity: 0,
           opacity: .7
-          
+
         });
       }
 
@@ -59,14 +59,14 @@
       foxLayer = L.geoJson(data, options).addTo(map);
     interactiveLayer = L.geoJson(data, options).addTo(map);
 
-  
+
     // fit the bounds to one of the layers
     map.fitBounds(foxLayer.getBounds());
 
     // set layer colors
     bobcatLayer.setStyle({
-     color: '#BB952F'
-     
+      color: '#BB952F'
+
     });
 
     coyoteLayer.setStyle({
@@ -85,12 +85,12 @@
 
     // call sequenceUI function
     sequenceUI(bobcatLayer, coyoteLayer, foxLayer)
-    dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer)
-    
+    dropDownUI(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer)
+
 
   } // end drawMap
 
-   function calcRadius(val) {
+  function calcRadius(val) {
     const radius = Math.sqrt(val / Math.PI);
     return radius * 10; // adjust scale factor
   }
@@ -109,7 +109,7 @@
           stroke: false,
           fillOpacity: .7,
           fillColor: '#BB952F'
-          
+
         })
       }
 
@@ -127,7 +127,7 @@
           stroke: false,
           fillOpacity: .7,
           fillColor: '#A21E36'
-          
+
         })
       }
     });
@@ -154,8 +154,8 @@
         opacity: 1,
         fillColor: false,
         fillOpacity: 1,
-        color:'#000000'
-        
+        color: '#000000'
+
       })
     });
 
@@ -163,53 +163,142 @@
 
   }
 
-function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
+  function dropDownUI(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
 
-  // add species filter
-  var speciesControl = L.control({
-    position: 'topright'
-  });
+    // add species filter
+    var speciesControl = L.control({
+      position: 'topright'
+    });
 
+    speciesControl.onAdd = function (map) {
+      var dropDownSpecies = L.DomUtil.get("species-dropdown-ui")
 
+      L.DomEvent.disableScrollPropagation(dropDownSpecies);
+      L.DomEvent.disableClickPropagation(dropDownSpecies);
 
-  speciesControl.addTo(map)
-
-  // select slider input and listen for change
-  $('#species-dropdown-ui select')
-  .on('change', function () {
-
-    // current value of slider is the month and year level
-    var selection = this.value;
-    console.log(selection)
-
-    if (selection == 'a') {
-
-      resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, 9)
-      $('#current-month').css('display', 'inherit')
-      $('#slider').css('display', 'inherit')
-
-    } else {
-      bobcatLayer.setStyle({
-        opacity: 0
-      })
-      coyoteLayer.setStyle({
-        opacity: 0
-      })
-      foxLayer.setStyle({
-        opacity: 0
-      })
-
-      $('#current-month').css('display', 'none')
-      $('#slider').css('display', 'none')
-
-      singleSpecies(interactiveLayer, selection);
-
+      return dropDownSpecies
     }
-    
-  });
 
-}
-  
+
+
+    speciesControl.addTo(map)
+
+    // select slider input and listen for change
+    $('#species-dropdown-ui select')
+      .on('change', function () {
+
+        // current value of slider is the month and year level
+        var selection = this.value;
+        console.log(selection)
+
+        if (selection == 'a') {
+
+          resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, 9)
+          $('#current-month').css('display', 'inherit')
+          $('#slider').css('display', 'inherit')
+
+        } else {
+          bobcatLayer.setStyle({
+            opacity: 0
+          })
+          coyoteLayer.setStyle({
+            opacity: 0
+          })
+          foxLayer.setStyle({
+            opacity: 0
+          })
+
+          $('#current-month').css('display', 'inherit')
+          $('#slider').css('display', 'inherit')
+
+          singleSpecies(interactiveLayer, selection);
+
+        }
+
+        if (selection == 'b') {
+
+          resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, 9)
+          bobcatLayer.setStyle({
+            opacity: .7
+          })
+          $('#current-month').css('display', 'inherit')
+          $('#slider').css('display', 'inherit')
+
+
+        } else {
+
+          coyoteLayer.setStyle({
+            opacity: 0
+          })
+          foxLayer.setStyle({
+            opacity: 0
+          })
+
+          $('#current-month').css('display', 'inherit')
+          $('#slider').css('display', 'inherit')
+
+          singleSpecies(interactiveLayer, selection);
+
+        }
+
+        if (selection == 'c') {
+
+          resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, 9)
+          coyoteLayer.setStyle({
+            opacity: .7
+          })
+          $('#current-month').css('display', 'inherit')
+          $('#slider').css('display', 'inherit')
+
+
+        } else {
+
+          bobcatLayer.setStyle({
+            opacity: 0
+          })
+          foxLayer.setStyle({
+            opacity: 0
+          })
+
+          $('#current-month').css('display', 'inherit')
+          $('#slider').css('display', 'inherit')
+
+          singleSpecies(interactiveLayer, selection);
+
+        }
+
+        if (selection == 'f') {
+
+          resizeCircles(bobcatLayer, coyoteLayer, foxLayer, interactiveLayer, 9)
+          foxLayer.setStyle({
+            opacity: .7
+          })
+          $('#current-month').css('display', 'inherit')
+          $('#slider').css('display', 'inherit')
+
+
+        } else {
+
+          bobcatLayer.setStyle({
+            opacity: 0
+          })
+          coyoteLayer.setStyle({
+            opacity: 0
+          })
+
+          $('#current-month').css('display', 'inherit')
+          $('#slider').css('display', 'inherit')
+
+          singleSpecies(interactiveLayer, selection);
+
+        }
+
+      });
+
+
+
+  }
+
 
   // select the current month and year 
   const month = $('#current-month span');
@@ -271,9 +360,11 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
   function singleSpecies(data, selection) {
 
     data.eachLayer(function (layer) {
-    // access field that has single species
-    //const bobcat = layer.feature.properties('b')
+      // access field that has single species
+    dropDownProps = layer.feature.properties['b' && 'c' &&'f']
+      
     });
+    
 
   }
 
@@ -415,34 +506,34 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
         info.hide();
 
         // reset the layer style
-         e.layer.setStyle({
-           fillOpacity: 0
+        e.layer.setStyle({
+          fillOpacity: 0
         });
       });
 
     });
 
     // when the mouse moves on the document
-  $(document).mousemove(function(e) {
+    $(document).mousemove(function (e) {
       // first offset from the mouse position of the info window
       info.css({
-          "left": e.pageX + 6,
-          "top": e.pageY - info.height() - 25
+        "left": e.pageX + 6,
+        "top": e.pageY - info.height() - 25
       });
 
       // if it crashes into the top, flip it lower right
       if (info.offset().top < 4) {
-          info.css({
-              "top": e.pageY + 15
-          });
+        info.css({
+          "top": e.pageY + 15
+        });
       }
       // if it crashes into the right, flip it to the left
       if (info.offset().left + info.width() >= $(document).width() - 40) {
-          info.css({
-              "left": e.pageX - info.width() - 80
-          });
+        info.css({
+          "left": e.pageX - info.width() - 80
+        });
       }
-  });
+    });
 
   }
 
