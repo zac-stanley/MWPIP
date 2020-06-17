@@ -21,8 +21,7 @@
     accessToken: accessToken
   }).addTo(map);
 
-  var attributeValue = "b9"
-  console.log(attributeValue)
+  
 
   omnivore.csv('Data/DetectionRates_BCGF_V5.csv')
     .on('ready', function (e) {
@@ -87,30 +86,11 @@
     // call sequenceUI function
     sequenceUI(bobcatLayer, coyoteLayer, foxLayer)
     dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer)
-    updateMap(bobcatLayer, coyoteLayer, foxLayer)
+    
 
   } // end drawMap
 
-  function updateMap(bobcatLayer, coyoteLayer, foxLayer, monthYear){
-    // bobcatLayer.eachLayer(function (layer) {
-    //   const bProps = (layer.feature.properties['b' + monthYear])
-    //   layer.setStyle({
-    //     fillColor: '#FFA500'
-    //   })
-    // });
-
-    // coyoteLayer.eachLayer(function (layer) {
-    //   const cProps = (layer.feature.properties['c' + monthYear])
-    //   layer.setStyle({
-    //     fillColor: '#FF69B4'
-    //   })
-    // });
-    
-  }
-
-
-
-  function calcRadius(val) {
+   function calcRadius(val) {
     const radius = Math.sqrt(val / Math.PI);
     return radius * 10; // adjust scale factor
   }
@@ -186,32 +166,16 @@
 function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
 
   // add species filter
-  var totalControl = L.control({
+  var speciesControl = L.control({
     position: 'topright'
   });
 
-  totalControl.onAdd = function () {
-
-    var dropDownTotal = L.DomUtil.get("total-dropdown-ui");
-
-    L.DomEvent.disableScrollPropagation(dropDownTotal);
-    L.DomEvent.disableClickPropagation(dropDownTotal); 
-
-    return dropDownTotal;
-
-  }
-
-    $('#total-dropdown-ui select').change(function() {
-     
-      attributeValue = this.value;
-      updateMap(bobcatLayer, coyoteLayer, foxLayer)
-    });
 
 
-  totalControl.addTo(map);
+  speciesControl.addTo(map)
 
   // select slider input and listen for change
-  $('#year-dropdown-ui select')
+  $('#species-dropdown-ui select')
   .on('change', function () {
 
     // current value of slider is the month and year level
@@ -307,7 +271,8 @@ function dropDownUI (bobcatLayer, coyoteLayer, foxLayer, interactiveLayer) {
   function singleSpecies(data, selection) {
 
     data.eachLayer(function (layer) {
-    // access field that has total detection rates by species or year
+    // access field that has single species
+    //const bobcat = layer.feature.properties('b')
     });
 
   }
