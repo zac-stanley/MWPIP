@@ -49,7 +49,7 @@
         return L.circleMarker(ll, {
 
           weight: 2,
-          fillOpacity: .7,
+          //fillOpacity: .7,
           opacity: .7
 
         });
@@ -98,7 +98,7 @@
       interactiveLayer.eachLayer(function (layer) {
 
         layer.setStyle({
-          color: '#333',
+          color: '#173560',
           
         })
         
@@ -128,7 +128,7 @@
         const radius = calcRadius(relativeDetRate);
         const color = function(species) {
           if (species == 'b') {
-            return '#772233' // for example
+            return '#BB952F' // for example
           } else {
             return '#333'
           }

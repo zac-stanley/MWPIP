@@ -64,14 +64,16 @@
 
   .legend-large {
     border-radius: 50%;
-    border-color: #A21E36 ;
+    border-color: #000000 ;
     border-width: .2em;
+    opacity: .7;
   }
 
    .legend-small {
     border-radius: 50%;
-    border-color: #BB952F;
+    border-color: #000000;
     border-width: .2em;
+    opacity: .7;
   }
   
     hr.small, hr.large {
@@ -80,6 +82,7 @@
     */ top: -8px;
     left: 60px;
     background: #000000;
+    opacity: .7;
     border: 1px dashed #ccc;     /* overwrite assembly.css rule */
     margin-top: 4px;            /* overwrite assembly.css rule */
   }
