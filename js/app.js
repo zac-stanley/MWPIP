@@ -27,7 +27,7 @@
 
 
 
-  omnivore.csv('Data/DetectionRates_BCGF_V5.csv')
+  omnivore.csv('Data/DetectionRates_BCGF_V7.csv')
     .on('ready', function (e) {
       // access geoJson here
       drawMap(e.target.toGeoJSON());
@@ -49,7 +49,7 @@
         return L.circleMarker(ll, {
 
           weight: 2,
-          fillOpacity: 0,
+          fillOpacity: .7,
           opacity: .7
 
         });
@@ -98,7 +98,8 @@
       interactiveLayer.eachLayer(function (layer) {
 
         layer.setStyle({
-          color: '#333'
+          color: '#333',
+          
         })
         
         const props =  layer.feature.properties
@@ -126,7 +127,7 @@
         const relativeDetRate = Number(props[species + monthYear])
         const radius = calcRadius(relativeDetRate);
         const color = function(species) {
-          if (species == 'c') {
+          if (species == 'b') {
             return '#772233' // for example
           } else {
             return '#333'
@@ -426,5 +427,7 @@
     });
 
   }
+
+  
 
 })();

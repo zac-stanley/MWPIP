@@ -39,7 +39,7 @@ The anticipated user interface will be a minimal bootstrap template that will us
 
 1. Excel and QGIS will be used to wrangle the data and prepare use in the web application
 2. Data will be in CSV and GeoJson format
-3. Libraries used will be leaflet, jQuery and Omnivore
+3. Libraries used will be leaflet, jQuery, and Omnivore
 4. The map will use a bootstrap or flexbox HTML template along with CSS, Assembly and native JavaScript
 5. The hosting platform that will be used is GitHub pages
 
