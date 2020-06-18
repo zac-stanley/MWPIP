@@ -49,8 +49,9 @@
         return L.circleMarker(ll, {
 
           weight: 2,
-          //fillOpacity: .7,
-          opacity: .7
+          fillOpacity: 0,
+          opacity: 1,
+          
 
         });
       }
@@ -58,9 +59,9 @@
     }
 
     // create 4 separate layers
-    const bobcatLayer = L.geoJson(data, options)
-      coyoteLayer = L.geoJson(data, options)
-      foxLayer = L.geoJson(data, options)
+    // const bobcatLayer = L.geoJson(data, options)
+    // coyoteLayer = L.geoJson(data, options)
+    // foxLayer = L.geoJson(data, options)
     interactiveLayer = L.geoJson(data, options).addTo(map);
 
 
@@ -71,6 +72,7 @@
     interactiveLayer.setStyle({
       weight: 2,
       color: '#222'
+      
 
     });
 
@@ -98,11 +100,11 @@
       interactiveLayer.eachLayer(function (layer) {
 
         layer.setStyle({
-          color: '#173560',
-          
+         color: '#173560'
+
         })
-        
-        const props =  layer.feature.properties
+
+        const props = layer.feature.properties
         const relativeDetRate = Number(props['b' + monthYear]) + Number(props['c' + monthYear]) + Number(props['f' + monthYear])
         const radius = calcRadius(relativeDetRate);
         if (radius == 0) {
@@ -113,7 +115,7 @@
         } else {
           layer.setRadius(radius);
         }
-  
+
       });
     } else {
 
@@ -121,19 +123,21 @@
 
         layer.setStyle({
           color: '#333'
+
         })
 
-        const props =  layer.feature.properties
+        const props = layer.feature.properties
         const relativeDetRate = Number(props[species + monthYear])
         const radius = calcRadius(relativeDetRate);
-        const color = function(species) {
+        const color = function (species) {
           if (species == 'b') {
-            return '#BB952F' // for example
+            return '#BB952F' 
           } else {
             return '#333'
           }
         }
-        console.log(color(species), species)
+        
+        // console.log(color(species), species)
         if (radius == 0) {
           layer.setStyle({
             color: '#555',
@@ -142,16 +146,50 @@
         } else {
           layer.setRadius(radius)
           layer.setStyle({
-           color: color(species)
+          color: color(species)
           })
-          
+
         }
 
-    })
+      });
 
+      interactiveLayer.eachLayer(function (layer) {
+
+        layer.setStyle({
+          color: '#A21E36'
+
+        })
+
+        const props = layer.feature.properties
+        const relativeDetRate = Number(props[species + monthYear])
+        const radius = calcRadius(relativeDetRate);
+        const color = function (species) {
+          if (species == 'c') {
+            return '#A21E36' 
+          } else {
+            return '#333'
+          }
+        }
+        // console.log(color(species), species)
+        if (radius == 0) {
+          layer.setStyle({
+            color: '#555',
+            radius: 0.5
+          })
+        } else {
+          layer.setRadius(radius)
+          layer.setStyle({
+          color: color(species)
+          })
+
+        }
+
+      });
+
+      
+     }
+    retrieveInfo(interactiveLayer, monthYear)
   }
-  retrieveInfo(interactiveLayer, monthYear)
-}
 
   function dropDownUI(interactiveLayer) {
 
@@ -181,8 +219,8 @@
         species = this.value;
         console.log(species)
         resizeCircles(interactiveLayer, 9, species)
-          $('#current-month').css('display', 'inherit')
-          $('#slider').css('display', 'inherit')
+        $('#current-month').css('display', 'inherit')
+        $('#slider').css('display', 'inherit')
       });
 
 
@@ -242,7 +280,7 @@
         month.html(mY[monthYear])
 
         // resize the circles with updated rate of detection
-        console.log (species)
+        console.log(species)
         resizeCircles(interactiveLayer, monthYear, species);
       });
 
@@ -252,10 +290,10 @@
 
     data.eachLayer(function (layer) {
       // access field that has single species
-    dropDownProps = layer.feature.properties['b' && 'c' &&'f']
-      
+      dropDownProps = layer.feature.properties['b' && 'c' && 'f']
+
     });
-    
+
 
   }
 
@@ -428,6 +466,6 @@
 
   }
 
-  
+
 
 })();
