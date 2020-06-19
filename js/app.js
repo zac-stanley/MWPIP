@@ -38,7 +38,7 @@
     })
     .on('error', function (e) {
       // if the error can't be parsed or loaded over AJAX
-      console.log(e.error[0].message);
+      //  console.log(e.error[0].message);
     })
 
   function drawMap(data) {
@@ -49,9 +49,9 @@
         return L.circleMarker(ll, {
 
           weight: 2,
-          fillOpacity: 0,
+          fillOpacity: .3,
           opacity: 1,
-          
+
 
         });
       }
@@ -72,7 +72,7 @@
     interactiveLayer.setStyle({
       weight: 2,
       color: '#222'
-      
+
 
     });
 
@@ -100,7 +100,7 @@
       interactiveLayer.eachLayer(function (layer) {
 
         layer.setStyle({
-         color: '#173560'
+          color: '#173560'
 
         })
 
@@ -121,22 +121,21 @@
 
       interactiveLayer.eachLayer(function (layer) {
 
-        layer.setStyle({
-          color: '#333'
-
-        })
-
         const props = layer.feature.properties
         const relativeDetRate = Number(props[species + monthYear])
         const radius = calcRadius(relativeDetRate);
         const color = function (species) {
           if (species == 'b') {
-            return '#BB952F' 
+            return '#BB952F'
+          } else if (species == 'c') {
+            return '#A21E36';
+          } else if (species == 'f') {
+            return '#3A4B56';
           } else {
             return '#333'
           }
         }
-        
+
         // console.log(color(species), species)
         if (radius == 0) {
           layer.setStyle({
@@ -146,81 +145,14 @@
         } else {
           layer.setRadius(radius)
           layer.setStyle({
-          color: color(species)
+            color: color(species)
           })
 
         }
 
       });
 
-      interactiveLayer.eachLayer(function (layer) {
-
-        layer.setStyle({
-          color: '#333'
-
-        })
-
-        const props = layer.feature.properties
-        const relativeDetRate = Number(props[species + monthYear])
-        const radius = calcRadius(relativeDetRate);
-        const color = function (species) {
-          if (species == 'c') {
-            return '#A21E36' 
-          } else {
-            return '#333'
-          }
-        }
-        // console.log(color(species), species)
-        if (radius == 0) {
-          layer.setStyle({
-            color: '#555',
-            radius: 0.5
-          })
-        } else {
-          layer.setRadius(radius)
-          layer.setStyle({
-          color: color(species)
-          })
-
-        }
-
-      });
-
-      interactiveLayer.eachLayer(function (layer) {
-
-        layer.setStyle({
-          color: '#333'
-
-        })
-
-        const props = layer.feature.properties
-        const relativeDetRate = Number(props[species + monthYear])
-        const radius = calcRadius(relativeDetRate);
-        const color = function (species) {
-          if (species == 'f') {
-            return '#3A4B56' 
-          } else {
-            return '#333'
-          }
-        }
-        // console.log(color(species), species)
-        if (radius == 0) {
-          layer.setStyle({
-            color: '#555',
-            radius: 0.5
-          })
-        } else {
-          layer.setRadius(radius)
-          layer.setStyle({
-          color: color(species)
-          })
-
-        }
-
-      });
-
-      
-      }
+    }
     retrieveInfo(interactiveLayer, monthYear)
   }
 
@@ -255,10 +187,7 @@
         $('#slider').css('display', 'inherit')
       });
 
-
-
   }
-
 
   // select the current month and year 
   const month = $('#current-month span');
@@ -312,7 +241,7 @@
         month.html(mY[monthYear])
 
         // resize the circles with updated rate of detection
-        console.log(species)
+        // console.log(species)
         resizeCircles(interactiveLayer, monthYear, species);
       });
 
@@ -499,7 +428,7 @@
 
         // reset the layer style
         e.layer.setStyle({
-          fillOpacity: 0
+          fillOpacity: .3
         });
       });
 

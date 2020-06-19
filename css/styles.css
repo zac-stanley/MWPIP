@@ -132,7 +132,7 @@
 
 @font-face {
   font-family: 'fairplex';
-  src: url(Fonts\FairplexWideOT.otf);
+  src: url(Fonts/FairplexWideOT.otf);
   font-style: normal;
   font-weight: 100;
 }
