@@ -156,7 +156,7 @@
       interactiveLayer.eachLayer(function (layer) {
 
         layer.setStyle({
-          color: '#A21E36'
+          color: '#333'
 
         })
 
@@ -189,7 +189,7 @@
       interactiveLayer.eachLayer(function (layer) {
 
         layer.setStyle({
-          color: '#A21E36'
+          color: '#333'
 
         })
 
@@ -220,7 +220,7 @@
       });
 
       
-     }
+      }
     retrieveInfo(interactiveLayer, monthYear)
   }
 
@@ -241,7 +241,6 @@
     }
 
 
-
     speciesControl.addTo(map)
 
     // select slider input and listen for change
@@ -250,7 +249,7 @@
 
         // current value of slider is the month and year level
         species = this.value;
-        console.log(species)
+        //console.log(species)
         resizeCircles(interactiveLayer, 9, species)
         $('#current-month').css('display', 'inherit')
         $('#slider').css('display', 'inherit')
@@ -449,6 +448,48 @@
       e.layer.setStyle({
         fillOpacity: .6
       });
+
+      // empty arrays for boys and girls values
+      const bobcatValues = [],
+        coyoteValues = [],
+        foxValues = []
+
+      // loop through the grade levels and push values into those arrays
+      for (let i = 9; i <= 45; i++) {
+        bobcatValues.push(props['b' + i]);
+        coyoteValues.push(props['c' + i]);
+        foxValues.push(props['f' + i]);
+      }
+
+      // add bobcat sparklines with options
+      $('.bobcatspark').sparkline(bobcatValues, {
+        width: '155px',
+        height: '30px',
+        lineColor: '#BB952F',
+        fillColor: '#BB952F',
+        spotRadius: 0,
+        lineWidth: 2
+      });
+
+      // add coyote sparklines with options
+      $('.coyotespark').sparkline(coyoteValues, {
+        width: '155px',
+        height: '30px',
+        lineColor: '#A21E36',
+        fillColor: '#A21E36',
+        spotRadius: 0,
+        lineWidth: 2
+      })
+
+      // add coyote sparklines with options
+      $('.foxspark').sparkline(foxValues, {
+        width: '155px',
+        height: '30px',
+        lineColor: '#3A4B56',
+        fillColor: '#3A4B56',
+        spotRadius: 0,
+        lineWidth: 2
+      })
 
       // hide the info panel when mousing off layergroup and remove affordance opacity
       interactiveLayer.on('mouseout', function (e) {
