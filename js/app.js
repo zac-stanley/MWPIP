@@ -59,9 +59,9 @@
     }
 
     // create 4 separate layers
-    // const bobcatLayer = L.geoJson(data, options)
-    // coyoteLayer = L.geoJson(data, options)
-    // foxLayer = L.geoJson(data, options)
+    const bobcatLayer = L.geoJson(data, options)
+    coyoteLayer = L.geoJson(data, options)
+    foxLayer = L.geoJson(data, options)
     interactiveLayer = L.geoJson(data, options).addTo(map);
 
 
@@ -186,6 +186,39 @@
 
       });
 
+      interactiveLayer.eachLayer(function (layer) {
+
+        layer.setStyle({
+          color: '#A21E36'
+
+        })
+
+        const props = layer.feature.properties
+        const relativeDetRate = Number(props[species + monthYear])
+        const radius = calcRadius(relativeDetRate);
+        const color = function (species) {
+          if (species == 'f') {
+            return '#3A4B56' 
+          } else {
+            return '#333'
+          }
+        }
+        // console.log(color(species), species)
+        if (radius == 0) {
+          layer.setStyle({
+            color: '#555',
+            radius: 0.5
+          })
+        } else {
+          layer.setRadius(radius)
+          layer.setStyle({
+          color: color(species)
+          })
+
+        }
+
+      });
+
       
      }
     retrieveInfo(interactiveLayer, monthYear)
@@ -283,17 +316,6 @@
         console.log(species)
         resizeCircles(interactiveLayer, monthYear, species);
       });
-
-  }
-
-  function singleSpecies(data, selection) {
-
-    data.eachLayer(function (layer) {
-      // access field that has single species
-      dropDownProps = layer.feature.properties['b' && 'c' && 'f']
-
-    });
-
 
   }
 
