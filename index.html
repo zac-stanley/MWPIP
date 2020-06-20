@@ -7,148 +7,170 @@
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-  crossorigin=""/>
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link href='css/styles.css' rel='stylesheet' />
   <link href='css/modal.css' rel='stylesheet' />
-  
+
 </head>
 
 <body>
 
-<div class='flex-parent viewport-full relative scroll-hidden'>
-  <div class='flex-child w-full w300-ml absolute static-ml left bottom'>
-    <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-sidebar py18 px12'>
-      <div class='flex-child flex-child--grow px12 py12 scroll-auto'>
-        <h1 class='txt-h3'>Wildlife Camera Rates of Detection:</h1><h3 class='bobcat txt-h3 mb6 inline-block'>Bobcat, </h3> <h3 class='coyote txt-h3 mb6 inline-block'>Coyote,</h3><h3 class='greyfox txt-h3 mb6  inline-block'>Grey Fox</h3>
-        <h3 class='txt-h3 mb6'>2014-2017</h3>
-        <p>This application displays rates of detection by month for the north array of cameras on Mt. Tamalpais.<br><br> A rate of detection is the number of species seen during each event, normalized by 100 working trap nights. A trap night is a 24-hour period where a camera was working correctly. <br><br> The number of species per event is the max number of species detected in a "burst" of camera images. The burst is taken from the first image trigger until there is a quiet time of 5 seconds between 1 image and the next.<br><br>Graduated symbols represent rates of detection by species as referenced in the legend where 100 is the highest recorded value and 50 is the median.</p>
-        <h4 class='txt-h4 mt18 mb12 txt-underline'>How to use the app:</h4>
-        <ul>
-          <li>1. Select species of interest from dropdown menu (all or indivdual).</li>
-          <li>2. Use time slider on lower left of screen to cycle through months and years of interest.</li>
-          <li>3. When time period of interest is determined hover mouse over camera location of interest to get an info window highlighting the rates of detection by species along with the trendline for each.</li>              
-        </ul>
-        <ul>
-          <div id="bobcatModal" class="my12">
-            <!-- single modal button -->
-            <button class="btn btn--gray round modal-btn">Bobcat Example Image</button>
-          </div>
-      
-         <h4 class='txt-h4 mt18 mb12 txt-underline'>Sample images linked below:</h4>
-          <li><a target="_blank"  href="Images/27347704761_ee7f2562de_o.jpg" class='bobcat link'>Bobcat</a></li>
-          <li><a target="_blank"  href="Images/31002247813_6a76bf955b_o.jpg" class='coyote link'>Coyote</a></li>
-          <li><a target="_blank"  href="Images/27144947690_62b1b6fca5_o.jpg" class='greyfox link'>Grey Fox</a></li>              
-        </ul>
+  <div class='flex-parent viewport-full relative scroll-hidden'>
+    <div class='flex-child w-full w300-ml absolute static-ml left bottom'>
+      <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-sidebar py18 px12'>
+        <div class='flex-child flex-child--grow px12 py12 scroll-auto'>
+          <h1 class='txt-h3'>Wildlife Camera Rates of Detection:</h1>
+          <h3 class='bobcat txt-h3 mb6 inline-block'>Bobcat, </h3>
+          <h3 class='coyote txt-h3 mb6 inline-block'>Coyote,</h3>
+          <h3 class='greyfox txt-h3 mb6  inline-block'>Grey Fox</h3>
+          <h3 class='txt-h3 mb6'>2014-2017</h3>
+          <p>This application displays rates of detection by month for the north array of cameras on Mt.
+            Tamalpais.<br><br> A rate of detection is the number of species seen during each event, normalized by 100
+            working trap nights. A trap night is a 24-hour period where a camera was working correctly. <br><br> The
+            number of species per event is the max number of species detected in a "burst" of camera images. The burst
+            is taken from the first image trigger until there is a quiet time of 5 seconds between 1 image and the
+            next.<br><br>Graduated symbols represent rates of detection by species as referenced in the legend where 100
+            is the highest recorded value and 50 is the median.</p>
+          <h4 class='txt-h4 mt18 mb12 txt-underline'>How to use the app:</h4>
+          <ul>
+            <li>1. Select species of interest from dropdown menu (all or indivdual).</li>
+            <li>2. Use time slider on lower left of screen to cycle through months and years of interest.</li>
+            <li>3. When time period of interest is determined hover mouse over camera location of interest to get an
+              info window highlighting the rates of detection by species along with the trendline for each.</li>
+          </ul>
+          <ul>
+            <div class="my12">
+              <!-- single modal button -->
+              <button class="btn btn--gray modal-btn">Camera Image Examples</button>
+            </div>
 
-      </div>
+            
 
-      <footer class='px12 py12 bg-footer txt-s'>
-        <ul>
-          <li>Learn more about  
-            <a class='link' href='https://www.onetam.org/our-work/wildlife-picture-index'>Marin Wildlife Picture Index Project</a>
-          </li>
-          <li>Map authored by
-            <a class='link' href='http://zac-stanley.github.io/'>Zac Stanley</a>
-          </li>
-        </ul>
-      </footer>
-    </div>
-  </div>
-  <div class='flex-child flex-child--grow viewport-twothirds viewport-full-ml'>
-    <div id="map" class='viewport-twothirds viewport-full-ml'></div>
 
-     <!-- current month and year -->
-  <div id='current-month' class='py6 px12 bg-sidebar round shadow-darken25 txt-spacing1'>
-    <p class='txt-bold txt-headline'>
-      <span>September, 2014</span>
-    </p>
-  </div>
+        </div>
 
-    <!-- ui slider -->
-    <div id='slider' class='range w240 bg-sidebar shadow-darken25  round-ml px12'>
-      <input type='range' min="9" , max="45" , value="1" , step="1" />
-    </div>
-
-    <!-- legend -->
-    <div id='legend' class='bg-sidebar shadow-darken25 txt-spacing1 round px12 py12  relative'>
-      <p class='txt-bold mb12 w240'>Rate of Detection for Bobcat, Coyote and Grey Fox by Camera</p>
-      <div class='legend-circles relative w180'>
-        <div class="legend-large border absolute"></div>
-        <div class="legend-small border absolute"></div>
-        <h4><div class="legend-large-label txt-h4 relative"></div>
-        <h4><div class="legend-small-label txt-h4 absolute"></div>
+        <footer class='px12 py12 bg-footer txt-s'>
+          <ul>
+            <li>Learn more about
+              <a class='link' href='https://www.onetam.org/our-work/wildlife-picture-index'>Marin Wildlife Picture Index
+                Project</a>
+            </li>
+            <li>Map authored by
+              <a class='link' href='http://zac-stanley.github.io/'>Zac Stanley</a>
+            </li>
+          </ul>
+        </footer>
       </div>
     </div>
+    <div class='flex-child flex-child--grow viewport-twothirds viewport-full-ml'>
+      <div id="map" class='viewport-twothirds viewport-full-ml'></div>
 
-    <!-- ui info panel -->
-    <div id='info' class='px12 py12 bg-info shadow-darken25  border--gray-dark round fixed w180 hmax-full'>
-    <p>Camera ID: <span>class='txt-p txt-bold</span>
-    <p class='bobcat'>Bobcat<span></span>: <span class='txt-p txt-bold'></span></p>
-    <p class='coyote'>Coyote<span></span>: <span class='txt-p txt-bold'></span></p>
-    <p class='greyfox'>Grey Fox<span></span>: <span class='txt-p txt-bold'></span></p>
-    <!-- Additional elements added here for this step! -->
-  <hr class='txt-hr'>
-  <p class='my6'>Trend: 2014 &ndash; 2017</p>
-  <p class='mb6'><span class='bobcatspark'></span></p>
-  <p><span class='coyotespark'></span></p><p><span class='foxspark'></span></p>
-</div>
-    
-    
-
-    <!--sparkline info -->
-    <div id='info' class='py6 px12 bg-white border border--gray-light round fixed w240'>
-    <p>County: <span></span></p>
-    <p class='bobcat'>Bobcat <span></span>: <span class='txt-l txt-bold'></span></p>
-    <p class='coyote'>Coyote <span></span>: <span class='txt-l txt-bold'></span></p>
-    <p class='fox'>Grey Fox <span></span>: <span class='txt-l txt-bold'></span></p>
-
-         <!-- year dropdown-->
-    <div id='species-dropdown-ui' class='select-container mx8 bg-sidebar round' >
-      <p><select class='select shadow-darken25 '>
-      <option value='all'>All Species</option>
-      <option value='b'>Bobcat</option>
-      <option value='c'>Coyote</option>
-      <option value='f'>Grey Fox</option>
-      </select></p>
-    <div class='select-arrow'></div>
-</div>
+      <!-- current month and year -->
+      <div id='current-month' class='py6 px12 bg-sidebar round shadow-darken25 txt-spacing1'>
+        <h3 class='txt-bold txt-headline'>
+          <span>September, 2014</span>
+        </h3>
       </div>
-    </div>
-  </div>
-  
-</div>
-<!-- bobcat modal content -->
-<div  class='fixed top right bottom left scroll-auto modal'>
-  <div class='viewport-half'>
-    <div class='flex-parent flex-parent--center-main pt36'>
-      <div class='flex-child bg-white round relative w600'>
-        <button class='absolute top right px12 py12 close-btn'>
-          <svg class='icon link color-darken50 close-btn'>
-            <use xlink:href='#icon-close'></use>
-          </svg>
-        </button>
-        <div class='px24 py24'>
-          <img src="Images/27347704761_ee7f2562de_o.jpg" width="100%" class="rounded"><h1>Bobcat</h1></div>
-          <div class='txt-m'>          
-          </div>
+
+      <!-- ui slider -->
+      <div id='slider' class='range w240 bg-sidebar shadow-darken25  round-ml px12'>
+        <input type='range' min="9" , max="45" , value="1" , step="1" />
+      </div>
+
+      <!-- legend -->
+      <div id='legend' class='bg-sidebar shadow-darken25 txt-spacing1 round px12 py12  relative'>
+        <h3 class='txt-bold mb12 w240'>Rate of Detection for Bobcat, Coyote and Grey Fox by Camera</h3>
+        <div class='legend-circles relative w180'>
+          <div class="legend-large border absolute"></div>
+          <div class="legend-small border absolute"></div>
+          <h4>
+            <div class="legend-large-label txt-h4 relative"></div>
+            <h4>
+              <div class="legend-small-label txt-h4 absolute"></div>
+        </div>
+      </div>
+
+      <!-- ui info panel -->
+      <div id='info' class='px12 py12 bg-info shadow-darken25  border--gray-dark round fixed w180 hmax-full'>
+        <p>Camera ID: <span class='txt-bold'></span></p>
+        <p class='bobcat'>Bobcat<span></span>: <span class='txt-p txt-bold'></span></p>
+        <p class='coyote'>Coyote<span></span>: <span class='txt-p txt-bold'></span></p>
+        <p class='greyfox'>Grey Fox<span></span>: <span class='txt-p txt-bold'></span></p>
+        <!-- Additional elements added here for this step! -->
+        <hr class='txt-hr'>
+        <p class='my6'>Trend: 2014 &ndash; 2017</p>
+        <p class='mb6'><span class='bobcatspark'></span></p>
+        <p><span class='coyotespark'></span></p>
+        <p><span class='foxspark'></span></p>
+      </div>
+
+
+
+      <!--sparkline info -->
+      <div id='info' class='py6 px12 bg-white border border--gray-light round fixed w240'>
+        <p>County: <span></span></p>
+        <p class='bobcat'>Bobcat <span></span>: <span class='txt-l txt-bold'></span></p>
+        <p class='coyote'>Coyote <span></span>: <span class='txt-l txt-bold'></span></p>
+        <p class='fox'>Grey Fox <span></span>: <span class='txt-l txt-bold'></span></p>
+
+        <!-- year dropdown-->
+        <div id='species-dropdown-ui' class='select-container mx8 bg-sidebar round'>
+          <p><select class='select shadow-darken25 '>
+              <option value='all'>All Species</option>
+              <option value='b'>Bobcat</option>
+              <option value='c'>Coyote</option>
+              <option value='f'>Grey Fox</option>
+            </select></p>
+          <div class='select-arrow'></div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
+      </div>
+      <!-- bobcat modal content -->
+      <div class='fixed top right bottom left scroll-auto modal'>
+        <div class='viewport-half'>
+          <div class='flex-parent flex-parent--center-main pt36'>
+            <div class='flex-child bg-white round relative w600'>
+              <button class='absolute top right px12 py12 close-btn'>
+                <svg class='icon link color-darken50 close-btn'>
+                  <use xlink:href='#icon-close'></use>
+                </svg>
+              </button>
+              <div class='px24 py24'>
+                <img src="Images/27347704761_ee7f2562de_o.jpg" width="100%" class="rounded">
+                <h1>Bobcat</h1>
+              </div>
+              <div class='px24 py24'>
+                <img src="Images/31002247813_6a76bf955b_o.jpg" width="100%" class="rounded">
+                <h1>Coyote</h1>
+              </div>
+              <div class='px24 py24'>
+                <img src="Images/27144947690_62b1b6fca5_o.jpg" width="100%" class="rounded">
+                <h1>Grey Fox</h1>
+              </div>
+              <div class='txt-m'>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      
 
   <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-  crossorigin=""></script>
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
   <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src='js/app.js'></script>
   <script src='js/modal.js'></script>
-  <script src='./data/monthLookup.js'></script>
+  <script src='data/monthLookup.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
 
 
