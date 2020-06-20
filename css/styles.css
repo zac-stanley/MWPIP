@@ -3,6 +3,21 @@
     font-family: "Verlag Bold";
     src: url(../Fonts/VerlagBold.otf);
   }
+
+  @font-face {
+    font-family: "Verlag Book";
+    src: url(../Fonts/VerlagBook.otf);
+  }
+
+  @font-face {
+    font-family: "Verlag XLight";
+    src: url(../Fonts/VerlagXLight.otf);
+  }
+
+  @font-face {
+    font-family: 'fairplex';
+    src: url(../Fonts/FairplexWideOT.otf);
+  }
   
   h1 {
     color: black;
@@ -26,39 +41,25 @@
 
   h3 {
     color: black;
-    font-family: 'verlag';
-    src: url(Fonts/VerlagBook.otf);
-    font-style: normal;
-    font-weight: normal;
-
+    font-family: "Verlag Book", sans-serif;
+    
   }
 
     h4 {
-    color: black;
-    font-family: 'verlag';
-    src: url(Fonts/VerlagBook.otf);
-    font-style: normal;
-    font-weight: normal;
+      color: black;
+      font-family: "Verlag Book", sans-serif;
 
   }
 
   p {
     color: black;
-    font-family: 'verlag';
-    src: url(Fonts/VerlagXLight.otf);
-    font-size: 1em;
-    font-style: normal;
-    font-weight: lighter;
+    font-family: "Verlag XLight", sans-serif;
 
   }
 
   li {
     color: black;
-    font-family: 'verlag';
-    src: url(Fonts/VerlagXLight.otf);
-    font-size: 1em;
-    font-style: normal;
-    font-weight: lighter;
+    font-family: "Verlag XLight", sans-serif;
 
   }
 
@@ -127,19 +128,5 @@
     background: #edf4f5;
     color:  #222;
   }
-
-@font-face {
-  font-family: 'verlag';
-  src: url(MWPIP/Fonts/VerlagBold.otf);
-  font-style: normal;
-  font-weight: 100
-}
-
-@font-face {
-  font-family: 'fairplex';
-  src: url(Fonts/FairplexWideOT.otf);
-  font-style: normal;
-  font-weight: 100;
-}
 
 
