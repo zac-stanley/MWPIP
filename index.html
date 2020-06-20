@@ -11,6 +11,7 @@
   crossorigin=""/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link href='css/styles.css' rel='stylesheet' />
+  <link href='css/modal.css' rel='stylesheet' />
   
 </head>
 
@@ -30,6 +31,11 @@
           <li>3. When time period of interest is determined hover mouse over camera location of interest to get an info window highlighting the rates of detection by species along with the trendline for each.</li>              
         </ul>
         <ul>
+          <div class="my12">
+            <!-- Example of single modal button -->
+            <button class="btn btn--gray round modal-btn">Example modal</button>
+          </div>
+      
          <h4 class='txt-h4 mt18 mb12 txt-underline'>Sample images linked below:</h4>
           <li><a target="_blank"  href="Images/27347704761_ee7f2562de_o.jpg" class='bobcat link'>Bobcat</a></li>
           <li><a target="_blank"  href="Images/31002247813_6a76bf955b_o.jpg" class='coyote link'>Coyote</a></li>
@@ -37,8 +43,6 @@
         </ul>
 
       </div>
-
-      
 
       <footer class='px12 py12 bg-footer txt-s'>
         <ul>
@@ -113,7 +117,30 @@
       </div>
     </div>
   </div>
+  
 </div>
+<!-- Example of single modal content -->
+<div class='fixed top right bottom left scroll-auto modal'>
+  <div class='viewport-half'>
+    <div class='flex-parent flex-parent--center-main pt36'>
+      <div class='flex-child bg-white round relative w600'>
+        <button class='absolute top right px12 py12 close-btn'>
+          <svg class='icon link color-darken50 close-btn'>
+            <use xlink:href='#icon-close'></use>
+          </svg>
+        </button>
+        <div class='px24 py24'>
+          <div class='txt-l mb12'>Modal title</div>
+          <div class='txt-m'>
+            I am some modal body content.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
 
   <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
@@ -122,6 +149,7 @@
   <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src='js/app.js'></script>
+  <script src='js/modal.js'></script>
   <script src='data/monthLookup.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
 
