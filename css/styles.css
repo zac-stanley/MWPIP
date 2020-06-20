@@ -1,9 +1,14 @@
+  /* example of adding a font resource */
+  @font-face {
+    font-family: "Verlag Bold";
+    src: url(../Fonts/VerlagBold.otf);
+  }
+  
   h1 {
     color: black;
-    font-family: 'verlag';
-    src: url(Fonts/VerlagBold.otf);
-    font-style: normal;
-    font-weight: bold;
+    font-family: "Verlag Bold", sans-serif;
+    /* font-style: normal;
+    font-weight: bold; */
 
   }
 
