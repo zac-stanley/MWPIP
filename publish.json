@@ -1,0 +1,10 @@
+{
+  
+  "title": "Wildlife Camera Rates of Detection:
+  Bobcat, Coyote,Grey Fox
+  2014-2017",
+  "info": "This project display rates of detection for wildlife cameras in Marin County, California from 2014-2017. It uses graduated symbols to display rates of detection and allows the user to show all three mapped species or one of their choosing. Each of these options can be displayed in a specific month and year for the period of record.",
+  "coordinates": [38.004, -122.665]
+  "author": Zac Stanley, 
+  "link": "https://zac-stanley.github.io/"
+}
