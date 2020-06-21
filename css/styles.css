@@ -63,10 +63,10 @@
 
   }
 
-    #map {
-      background: #448ee4;
+  #map {
+    background: #448ee4;
       
-    }
+  }
 
   .legend-large {
     border-radius: 50%;
@@ -75,14 +75,14 @@
     opacity: .7;
   }
 
-   .legend-small {
+  .legend-small {
     border-radius: 50%;
     border-color: #000000;
     border-width: .2em;
     opacity: .7;
   }
   
-    hr.small, hr.large {
+  hr.small, hr.large {
     width: 100px;
     position: absolute;
     */ top: -8px;
@@ -99,20 +99,20 @@
 
   .bobcat {
     color: #BB952F;
-}
+  }
 
   .coyote {
     color: #A21E36;
-}
+  }
 
   .greyfox {
     color: #3A4B56;
-}
+  }
 
   .bg-sidebar {
     background: #edf4f5;
     
-}
+  }
 
   .bg-footer {
     background: #d6e5dd;
