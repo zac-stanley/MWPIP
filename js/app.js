@@ -7,7 +7,7 @@
     zoom: 13.4,
     minZoom: 11,
     maxZoom: 14,
-    //maxBounds: L.latLngBounds([-122.75, 38.05], [-122.60, 37.97])
+    
   });
 
   // mapbox API access Token
@@ -25,20 +25,20 @@
   // make global
   let species = 'all'
 
+  // access csv data and creat geoJSON representation
   omnivore.csv('./Data/DetectionRates_BCGF_V7.csv')
     .on('ready', function (e) {
       // access geoJson here
       drawMap(e.target.toGeoJSON());
       drawLegend(e.target.toGeoJSON());
-      // console.log(e.target.toGeoJSON()) 
-      // console.log(e.target)
-      // all data loaded into the layer
+ 
     })
     .on('error', function (e) {
       // if the error can't be parsed or loaded over AJAX
-      //  console.log(e.error[0].message);
+        console.log(e.error[0].message);
     })
 
+  // declare drapMap function
   function drawMap(data) {
     // console.log(data)
     const options = {
@@ -56,16 +56,14 @@
 
     }
 
-    // create 4 separate layers
-    // const bobcatLayer = L.geoJson(data, options)
-    // coyoteLayer = L.geoJson(data, options)
-    // foxLayer = L.geoJson(data, options)
+    // create interactive layer
     interactiveLayer = L.geoJson(data, options).addTo(map);
 
 
     // fit the bounds to one of the layers
     map.fitBounds(interactiveLayer.getBounds());
 
+    // set initial style
     interactiveLayer.setStyle({
       weight: 2,
       color: '#222'
@@ -84,6 +82,7 @@
 
   } // end drawMap
 
+  // declare calcRadius
   function calcRadius(val) {
     const radius = Math.sqrt(val / Math.PI);
     return radius * 10; // adjust scale factor
@@ -120,11 +119,11 @@
         const relativeDetRate = Number(props[species + monthYear])
         const radius = calcRadius(relativeDetRate);
         const color = function (species) {
-          if (species == 'b') {
+          if (species == 'b') { // select bobcat 
             return '#BB952F'
-          } else if (species == 'c') {
+          } else if (species == 'c') { // select coyote
             return '#A21E36';
-          } else if (species == 'f') {
+          } else if (species == 'f') { // select fox
             return '#3A4B56';
           } else {
             return '#333'
@@ -148,9 +147,11 @@
       });
 
     }
+    // call retrieveInfo function
     retrieveInfo(interactiveLayer, monthYear)
   }
 
+  // declare dropDownUI function
   function dropDownUI(interactiveLayer) {
 
     // add species filter
@@ -186,6 +187,7 @@
   // select the current month and year 
   const month = $('#current-month span');
 
+  // declare sequenceUI function
   function sequenceUI(interactiveLayer) {
 
     // do the same thing for the UI slider
@@ -193,6 +195,7 @@
       position: 'bottomleft'
     });
 
+    
     sliderControl.onAdd = function (map) {
 
       const controls = L.DomUtil.get("slider");
@@ -232,6 +235,7 @@
         // current value of slider is current month and year 
         var monthYear = this.value;
 
+        // access month and year lookup
         month.html(mY[monthYear])
 
         // resize the circles with updated rate of detection
@@ -384,7 +388,7 @@
         foxValues.push(props['f' + i]);
       }
 
-      // add bobcat sparklines with options
+      // add bobcat sparkline with options
       $('.bobcatspark').sparkline(bobcatValues, {
         width: '155px',
         height: '30px',
@@ -394,7 +398,7 @@
         lineWidth: 2
       });
 
-      // add coyote sparklines with options
+      // add coyote sparkline with options
       $('.coyotespark').sparkline(coyoteValues, {
         width: '155px',
         height: '30px',
@@ -404,7 +408,7 @@
         lineWidth: 2
       })
 
-      // add coyote sparklines with options
+      // add coyote sparkline with options
       $('.foxspark').sparkline(foxValues, {
         width: '155px',
         height: '30px',
