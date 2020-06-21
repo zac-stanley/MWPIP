@@ -25,8 +25,6 @@
   // make global
   let species = 'all'
 
-
-
   omnivore.csv('data/DetectionRates_BCGF_V7.csv')
     .on('ready', function (e) {
       // access geoJson here
@@ -59,20 +57,18 @@
     }
 
     // create 4 separate layers
-    const bobcatLayer = L.geoJson(data, options)
-    coyoteLayer = L.geoJson(data, options)
-    foxLayer = L.geoJson(data, options)
+    // const bobcatLayer = L.geoJson(data, options)
+    // coyoteLayer = L.geoJson(data, options)
+    // foxLayer = L.geoJson(data, options)
     interactiveLayer = L.geoJson(data, options).addTo(map);
 
 
     // fit the bounds to one of the layers
     map.fitBounds(interactiveLayer.getBounds());
 
-
     interactiveLayer.setStyle({
       weight: 2,
       color: '#222'
-
 
     });
 
@@ -85,7 +81,6 @@
     // call sequenceUI function
     sequenceUI(interactiveLayer)
     dropDownUI(interactiveLayer)
-
 
   } // end drawMap
 
@@ -171,7 +166,6 @@
 
       return dropDownSpecies
     }
-
 
     speciesControl.addTo(map)
 
@@ -310,7 +304,7 @@
       })
 
       // label the max and median value
-      $(".legend-large-label").html(maxValue.toLocaleString());
+      $(".legend-large-label").html("maxValue.toLocaleString()");
       $(".legend-small-label").html((maxValue / 2).toLocaleString());
 
       // adjust the position of the large circle label based on size of circle
