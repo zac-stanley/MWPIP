@@ -25,7 +25,7 @@
   // make global
   let species = 'all'
 
-  omnivore.csv('data/DetectionRates_BCGF_V7.csv')
+  omnivore.csv('./Data/DetectionRates_BCGF_V7.csv')
     .on('ready', function (e) {
       // access geoJson here
       drawMap(e.target.toGeoJSON());
