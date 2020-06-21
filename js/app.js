@@ -304,7 +304,7 @@
       })
 
       // label the max and median value
-      $(".legend-large-label").html("maxValue.toLocaleString()");
+      $(".legend-large-label").html(maxValue.toLocaleString());
       $(".legend-small-label").html((maxValue / 2).toLocaleString());
 
       // adjust the position of the large circle label based on size of circle
