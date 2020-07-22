@@ -14,7 +14,7 @@
   var accessToken = 'pk.eyJ1IjoiemFjc3RhbmxleSIsImEiOiJCS20zaVR3In0._oaGhAVLz04gbE3M2HKHGA'
 
   // request a mapbox raster tile layer and add to map
-  L.tileLayer(`https://api.mapbox.com/styles/v1/zacstanley/ckbclel26038a1ilref7j1vfs/tiles/256/{z}/{x}/{y}@2x?access_token=${accessToken}`, {
+  L.tileLayer(`https://api.mapbox.com/styles/v1/zacstanley/ckcxfno5u0tgt1ip3w8j2i0hl/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiemFjc3RhbmxleSIsImEiOiJCS20zaVR3In0._oaGhAVLz04gbE3M2HKHGA`, {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox.light',
